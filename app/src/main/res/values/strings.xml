@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SisGCM</string>
+
+    <string name="entrar">ENTRAR</string>
+    <string name="text_cadastro">Crie uma conta clicando aqui</string>
+    <string name="btn_principal">BOGCM</string>
+    <string name="text_BOGCMComOcorrencia">Comunicado da ocorrência</string>
+    <string name="btn_avancaComOcorrencia">AVANÇAR</string>
+
+
+
+    <string-array name="itens_spinner">
+        <item>COMO FOI SOLICITADO?</item>
+        <item>ABORDAGEM</item>
+        <item>CCO</item>
+        <item>PRESENCIAL</item>
+        <item>SUPERVISÃO</item>
+    </string-array>
+
+</resources>

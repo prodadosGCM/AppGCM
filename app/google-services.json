@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "423588357853",
+    "project_id": "sisgcm-9b87e",
+    "storage_bucket": "sisgcm-9b87e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423588357853:android:f5581ccccecd2d852b5d34",
+        "android_client_info": {
+          "package_name": "com.example.sisgcm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9ctgNojff6pIATZ7aCDE-pqd9CV2TS44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

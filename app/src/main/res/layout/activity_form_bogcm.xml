@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormBOGCM">
+
+
+    <View
+        android:id="@+id/containerComponentsBOGCM"
+        style="@style/ContainerComponentsBOGCM"
+        android:layout_width="391dp"
+        android:layout_height="690dp"
+        android:layout_marginTop="80dp"
+
+        app:layout_constraintEnd_toEndOf="@id/progressbar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/progressbar"
+        app:layout_constraintTop_toBottomOf="@id/progressbar" />
+
+    <EditText
+        android:id="@+id/edit_data"
+        style="@style/Edit_Text"
+        android:layout_marginTop="36dp"
+        android:hint="DATA"
+        android:inputType="date"
+        android:maxLength="8"
+        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintTop_toTopOf="@id/containerComponentsBOGCM" />
+
+    <EditText
+        android:id="@+id/edit_hora_com"
+        style="@style/Edit_Text"
+        android:layout_marginTop="12dp"
+        android:drawableRight="@drawable/icone_olhosenha"
+        android:hint="HORA COMUNICAÇÃO"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintTop_toBottomOf="@id/edit_data" />
+
+    <EditText
+        android:id="@+id/edit_hora_chegada"
+        style="@style/Edit_Text"
+        android:layout_marginTop="12dp"
+        android:drawableRight="@drawable/icone_olhosenha"
+        android:hint="HORA DA CHEGADA NO LOCAL"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintTop_toBottomOf="@id/edit_hora_com" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        style="@style/Edit_Text"
+        android:hint="COMO FOI SOLICITADO?"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintTop_toBottomOf="@id/edit_hora_chegada"
+        android:entries="@array/itens_spinner" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_ComOcorrencia"
+        style="@style/Button"
+        android:layout_marginTop="350dp"
+        android:text="@string/btn_avancaComOcorrencia"
+        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintTop_toBottomOf="@id/edit_hora_chegada" />
+
+    <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_ComOcorrencia"
+                />
+
+            <TextView
+                android:id="@+id/text_telaBOGCMComOcorrencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_BOGCMComOcorrencia"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_marinho"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressbar"
+                />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
