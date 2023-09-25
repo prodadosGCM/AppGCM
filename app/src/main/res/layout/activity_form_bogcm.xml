@@ -11,55 +11,47 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".FormBOGCM">
 
 
-    <View
-        android:id="@+id/containerComponentsBOGCM"
-        style="@style/ContainerComponentsBOGCM"
-        android:layout_width="391dp"
-        android:layout_height="690dp"
-        android:layout_marginTop="80dp"
-
-        app:layout_constraintEnd_toEndOf="@id/progressbar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/progressbar"
-        app:layout_constraintTop_toBottomOf="@id/progressbar" />
 
     <EditText
         android:id="@+id/edit_data"
         style="@style/Edit_Text"
         android:layout_marginTop="36dp"
         android:hint="DATA"
+        android:drawableRight="@drawable/dataimagem"
+
         android:inputType="date"
         android:maxLength="8"
-        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
-        app:layout_constraintTop_toTopOf="@id/containerComponentsBOGCM" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_telaBOGCMComOcorrencia" />
 
     <EditText
         android:id="@+id/edit_hora_com"
         style="@style/Edit_Text"
         android:layout_marginTop="12dp"
-        android:drawableRight="@drawable/icone_olhosenha"
+        android:drawableRight="@drawable/relogioimagem"
         android:hint="HORA COMUNICAÇÃO"
         android:inputType="time"
-        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_data" />
 
     <EditText
         android:id="@+id/edit_hora_chegada"
         style="@style/Edit_Text"
         android:layout_marginTop="12dp"
-        android:drawableRight="@drawable/icone_olhosenha"
+        android:drawableRight="@drawable/relogioimagem"
         android:hint="HORA DA CHEGADA NO LOCAL"
         android:inputType="time"
-        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_hora_com" />
 
     <Spinner
@@ -68,11 +60,12 @@
         style="@style/Edit_Text"
         android:hint="COMO FOI SOLICITADO?"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginTop="12dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_hora_chegada"
         android:entries="@array/itens_spinner" />
 
@@ -81,9 +74,9 @@
         style="@style/Button"
         android:layout_marginTop="350dp"
         android:text="@string/btn_avancaComOcorrencia"
-        app:layout_constraintEnd_toEndOf="@id/containerComponentsBOGCM"
+        app:layout_constraintEnd_toEndOf="@id/edit_hora_chegada"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/containerComponentsBOGCM"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_hora_chegada" />
 
     <ProgressBar
@@ -104,13 +97,12 @@
                 android:text="@string/text_BOGCMComOcorrencia"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/azul_marinho"
+                android:textColor="@color/white"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
-
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/progressbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 />
 
 

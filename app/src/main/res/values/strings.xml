@@ -10,6 +10,7 @@
 
 
     <string-array name="itens_spinner">
+
         <item>COMO FOI SOLICITADO?</item>
         <item>ABORDAGEM</item>
         <item>CCO</item>
