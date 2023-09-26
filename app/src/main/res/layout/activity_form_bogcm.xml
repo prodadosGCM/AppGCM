@@ -55,19 +55,20 @@
         app:layout_constraintTop_toBottomOf="@id/edit_hora_com" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        style="@style/Edit_Text"
-        android:hint="COMO FOI SOLICITADO?"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_marginTop="12dp"
+        android:id="@+id/spinnercomo"
+        android:layout_width="326dp"
+        android:layout_height="63dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:entries="@array/itens_spinner"
+        android:layout="@layout/textview_spinner"
+
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/edit_hora_chegada"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_hora_chegada"
-        android:entries="@array/itens_spinner" />
+
+        app:layout_constraintStart_toStartOf="@id/edit_hora_chegada"
+        app:layout_constraintTop_toBottomOf="@id/edit_hora_chegada" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_ComOcorrencia"
@@ -104,6 +105,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
