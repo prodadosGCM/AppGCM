@@ -8,7 +8,6 @@
     <string name="btn_avancaComOcorrencia">AVANÇAR</string>
 
 
-
     <string-array name="itens_spinner">
         <item>COMO FOI SOLICITADO?</item>
         <item>ABORDAGEM</item>

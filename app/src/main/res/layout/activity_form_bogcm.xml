@@ -24,7 +24,8 @@
         android:drawableRight="@drawable/dataimagem"
 
         android:inputType="date"
-        android:maxLength="8"
+        android:maxLength="10"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,18 +57,13 @@
 
     <Spinner
         android:id="@+id/spinnercomo"
-        android:layout_width="326dp"
-        android:layout_height="63dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
         android:entries="@array/itens_spinner"
         android:layout="@layout/textview_spinner"
-
+        style="@style/Edit_Text"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="@id/edit_hora_chegada"
-        app:layout_constraintHorizontal_bias="0.0"
-
-        app:layout_constraintStart_toStartOf="@id/edit_hora_chegada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_hora_chegada" />
 
     <androidx.appcompat.widget.AppCompatButton
