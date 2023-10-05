@@ -5,6 +5,13 @@
     <string name="text_cadastro">Crie uma conta clicando aqui</string>
     <string name="btn_principal">BOGCM</string>
     <string name="text_BOGCMComOcorrencia">Comunicado da ocorrência</string>
+    <string name="text_BOGCMLocalOcorrencia">Local da ocorrência</string>
+    <string name="text_BOGCMObservacao">Relato Sucinto/Observação</string>
+    <string name="text_BOGCMQualificaçãoQ1">Qualificação das partes envolvidas - Q1</string>
+    <string name="text_BOGCMQualificaçãoQ2">Qualificação das partes envolvidas - Q2</string>
+    <string name="text_BOGCMfinalizacaoOcorrencia">Finalização da ocorrência</string>
+
+
     <string name="btn_avancaComOcorrencia">AVANÇAR</string>
 
 
@@ -15,4 +22,35 @@
         <item>PRESENCIAL</item>
         <item>SUPERVISÃO</item>
     </string-array>
+
+
+    <string-array name="itens_spinnerBairro">
+        <item>BAIRRO?</item>
+        <item>BRAGA</item>
+        <item>CENTRO</item>
+        <item>SÃO CRISTÓVÃO</item>
+        <item>OUTRO (DESCREVER NA OBSERVAÇÃO)</item>
+    </string-array>
+
+
+    <string-array name="itens_spinner_qualificacao_q1">
+        <item>SELECIONE UMA DAS OPÇÕES?</item>
+        <item>SOLICITANTE</item>
+        <item>SUSPEITO</item>
+        <item>AUTOR</item>
+        <item>TESTEMUNHA</item>
+        <item>OUTRO (DESCREVER NA OBSERVAÇÃO)</item>
+    </string-array>
+
+
+    <string-array name="itens_spinner_qualificacao_q2">
+        <item>SELECIONE UMA DAS OPÇÕES?</item>
+        <item>SOLICITANTE</item>
+        <item>SUSPEITO</item>
+        <item>AUTOR</item>
+        <item>TESTEMUNHA</item>
+        <item>OUTRO (DESCREVER NA OBSERVAÇÃO)</item>
+    </string-array>
+
+
 </resources>

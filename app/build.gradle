@@ -44,6 +44,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
 
+    // maskara data e hora https://github.com/santalu/maskara.git
+    implementation 'com.github.santalu:maskara:1.0.0'
 
 
 }
