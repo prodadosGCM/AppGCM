@@ -13,353 +13,383 @@
     android:orientation="vertical"
     >
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".FormBOGCM">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:context=".FormBOGCM">
 
-    <EditText
-        android:id="@+id/edit_data"
-        style="@style/Edit_Text"
-        android:layout_marginTop="36dp"
-        android:hint="DATA"
-        android:drawableRight="@drawable/dataimagem"
-        android:inputType="date"
-        android:maxLength="10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text_telaBOGCMComOcorrencia" />
+        <EditText
+            android:id="@+id/edit_data"
+            style="@style/Edit_Text"
+            android:layout_marginTop="36dp"
+            android:drawableRight="@drawable/dataimagem"
+            android:hint="DATA"
+            android:inputType="date"
+            android:maxLength="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_telaBOGCMComOcorrencia" />
 
-    <EditText
-        android:id="@+id/edit_hora_inicio"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:drawableRight="@drawable/relogioimagem"
-        android:hint="HORA INICIO OCORRÊNCIA"
-        app:mask="##:##"
-        android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_data" />
+        <EditText
+            android:id="@+id/edit_hora_inicio"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/relogioimagem"
+            android:hint="HORA INICIO OCORRÊNCIA"
+            android:inputType="time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_data"
+            app:mask="##:##" />
 
-    <Spinner
-        android:id="@+id/spinnercomo"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/itens_spinner"
-        android:layout="@layout/textview_spinner"
-        style="@style/Edit_Text"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_hora_inicio" />
+        <Spinner
+            android:id="@+id/spinnercomo"
+            style="@style/Edit_Text"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/itens_spinner"
+            android:layout="@layout/textview_spinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_hora_inicio" />
 
-    <TextView
-        android:id="@+id/text_telaBOGCMLocalocorrencia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_BOGCMLocalOcorrencia"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnercomo" />
+        <TextView
+            android:id="@+id/text_telaBOGCMLocalocorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMLocalOcorrencia"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinnercomo" />
 
-    <EditText
-        android:id="@+id/edit_endereco"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:drawableRight="@drawable/local_endereco"
-        android:hint="ENDEREÇO OCORRÊNCIA"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMLocalocorrencia" />
+        <EditText
+            android:id="@+id/edit_endereco"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/local_endereco"
+            android:hint="ENDEREÇO OCORRÊNCIA"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMLocalocorrencia" />
 
-    <EditText
-        android:id="@+id/edit_nr_endereco"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="NR"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_endereco" />
+        <EditText
+            android:id="@+id/edit_nr_endereco"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="NR"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_endereco" />
 
-    <EditText
-        android:id="@+id/edit_complemento"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="COMPLEMENTO"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_nr_endereco" />
+        <EditText
+            android:id="@+id/edit_complemento"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="COMPLEMENTO"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_nr_endereco" />
 
-    <EditText
-        android:id="@+id/edit_PontoReferencia"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="PONTO DE REFERÊNCIA"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_complemento" />
-
-
-    <Spinner
-        android:id="@+id/spinnerBairro"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/itens_spinnerBairro"
-        android:layout="@layout/textview_spinner"
-        style="@style/Edit_Text"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_PontoReferencia" />
-
-    <TextView
-        android:id="@+id/text_telaBOGCMObservacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_BOGCMObservacao"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnerBairro" />
-
-    <EditText
-        android:id="@+id/edit_observacao"
-        style="@style/Edit_TextObservacao"
-        android:layout_marginTop="12dp"
-        android:hint="OBSERVAÇÃO"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMObservacao" />
-
-    <TextView
-        android:id="@+id/text_telaBOGCMQualificacaoQ1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_BOGCMQualificaçãoQ1"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_observacao" />
-
-    <EditText
-        android:id="@+id/edit_nome_Q1"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="NOME COMPLETO"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMQualificacaoQ1" />
-
-    <EditText
-        android:id="@+id/edit_CPF_Q1"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="CPF"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_nome_Q1" />
-
-    <EditText
-        android:id="@+id/edit_telefone_Q1"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="TELEFONE"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_CPF_Q1" />
-
-    <Spinner
-        android:id="@+id/spinner_qualificacao_q1"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/itens_spinner_qualificacao_q1"
-        android:layout="@layout/textview_spinner"
-        style="@style/Edit_Text"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_telefone_Q1" />
+        <EditText
+            android:id="@+id/edit_PontoReferencia"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="PONTO DE REFERÊNCIA"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_complemento" />
 
 
-    <TextView
-        android:id="@+id/text_telaBOGCMQualificacaoQ2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_BOGCMQualificaçãoQ2"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_qualificacao_q1" />
+        <Spinner
+            android:id="@+id/spinnerBairro"
+            style="@style/Edit_Text"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/itens_spinnerBairro"
+            android:layout="@layout/textview_spinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_PontoReferencia" />
 
-    <EditText
-        android:id="@+id/edit_nome_Q2"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="NOME COMPLETO"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMQualificacaoQ2" />
+        <TextView
+            android:id="@+id/text_telaBOGCMObservacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMObservacao"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinnerBairro" />
 
-    <EditText
-        android:id="@+id/edit_CPF_Q2"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="CPF"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_nome_Q2" />
-
-    <EditText
-        android:id="@+id/edit_telefone_Q2"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="TELEFONE"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_CPF_Q2" />
-
-    <Spinner
-        android:id="@+id/spinner_qualificacao_q2"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/itens_spinner_qualificacao_q2"
-        android:layout="@layout/textview_spinner"
-        style="@style/Edit_Text"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_telefone_Q2" />
-
-    <TextView
-        android:id="@+id/text_telaBOGCMfinalizacaoOcorrencia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_BOGCMfinalizacaoOcorrencia"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_qualificacao_q2" />
-
-    <EditText
-        android:id="@+id/edit_nomeGCM"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="NOME DOS GCM's"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMfinalizacaoOcorrencia" />
-
-    <EditText
-        android:id="@+id/edit_Grupamento"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:hint="GRUPAMENTO"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_nomeGCM" />
+        <Spinner
+            android:id="@+id/spinner_tipo_ocorrencia"
+            style="@style/Edit_Text"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/itens_spinner_tipo_ocorrencia"
+            android:layout="@layout/textview_spinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMObservacao" />
 
 
+        <EditText
+            android:id="@+id/edit_observacao"
+            style="@style/Edit_TextObservacao"
+            android:layout_marginTop="12dp"
+            android:hint="RELATO SUCINTO/OBSERVAÇÃO"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_tipo_ocorrencia" />
+
+        <TextView
+            android:id="@+id/text_telaBOGCMQualificacaoQ1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMQualificaçãoQ1"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_observacao" />
+
+        <EditText
+            android:id="@+id/edit_nome_Q1"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="NOME COMPLETO"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMQualificacaoQ1" />
+
+        <com.santalu.maskara.widget.MaskEditText
+            android:id="@+id/edit_CPF_Q1"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="CPF"
+            android:inputType="number"
+            android:maxLength="14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_nome_Q1"
+            app:mask="###.###.###-##" />
+
+        <com.santalu.maskara.widget.MaskEditText
+            android:id="@+id/edit_telefone_Q1"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="TELEFONE"
+            android:inputType="number"
+            android:maxLength="14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_CPF_Q1"
+            app:mask="(##)#####-####" />
+
+        <Spinner
+            android:id="@+id/spinner_qualificacao_q1"
+            style="@style/Edit_Text"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/itens_spinner_qualificacao_q1"
+            android:layout="@layout/textview_spinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_telefone_Q1" />
 
 
+        <TextView
+            android:id="@+id/text_telaBOGCMQualificacaoQ2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMQualificaçãoQ2"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_qualificacao_q1" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_ComOcorrencia"
-        style="@style/Button"
-        android:layout_marginTop="350dp"
-        android:text="@string/btn_avancaComOcorrencia"
-        app:layout_constraintEnd_toEndOf="@id/edit_hora_final"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_hora_final" />
+        <EditText
+            android:id="@+id/edit_nome_Q2"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="NOME COMPLETO"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMQualificacaoQ2" />
 
-    <EditText
-        android:id="@+id/edit_hora_final"
-        style="@style/Edit_Text"
-        android:layout_marginTop="12dp"
-        android:drawableRight="@drawable/relogioimagem"
-        android:hint="HORA FINAL OCORRÊNCIA"
-        android:inputType="time"
-        app:mask="##:##"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_Grupamento" />
+        <com.santalu.maskara.widget.MaskEditText
+            android:id="@+id/edit_CPF_Q2"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="CPF"
+            android:inputType="number"
+            android:maxLength="14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_nome_Q2"
+            app:mask="###.###.###-##" />
+
+        <com.santalu.maskara.widget.MaskEditText
+            android:id="@+id/edit_telefone_Q2"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="TELEFONE"
+            android:inputType="number"
+            android:maxLength="14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_CPF_Q2"
+            app:mask="(##)#####-####" />
+
+        <Spinner
+            android:id="@+id/spinner_qualificacao_q2"
+            style="@style/Edit_Text"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/itens_spinner_qualificacao_q2"
+            android:layout="@layout/textview_spinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_telefone_Q2" />
+
+        <TextView
+            android:id="@+id/text_telaBOGCMfinalizacaoOcorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMfinalizacaoOcorrencia"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_qualificacao_q2" />
+
+        <EditText
+            android:id="@+id/edit_nomeGCM"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="NOME DOS GCM's"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMfinalizacaoOcorrencia" />
+
+        <Spinner
+            android:id="@+id/spinner_grupamento"
+            style="@style/Edit_Text"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/itens_spinner_grupamento"
+            android:layout="@layout/textview_spinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_nomeGCM" />
 
 
-    <ProgressBar
-                android:id="@+id/progressbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_ComOcorrencia"
-                />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_ComOcorrencia"
+            style="@style/Button"
+            android:layout_marginTop="350dp"
+            android:text="@string/btn_avancaComOcorrencia"
+            app:layout_constraintEnd_toEndOf="@id/edit_hora_final"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_hora_final" />
 
-            <TextView
-                android:id="@+id/text_telaBOGCMComOcorrencia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_BOGCMComOcorrencia"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+        <EditText
+            android:id="@+id/edit_hora_final"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/relogioimagem"
+            android:hint="HORA FINAL OCORRÊNCIA"
+            android:inputType="time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_grupamento"
+            app:mask="##:##" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            style="@style/Edit_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="TIPO DE OCORRÊNCIA?"
+
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_hora_final" />
+        />
+
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_ComOcorrencia" />
+
+        <TextView
+            android:id="@+id/text_telaBOGCMComOcorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMComOcorrencia"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
 

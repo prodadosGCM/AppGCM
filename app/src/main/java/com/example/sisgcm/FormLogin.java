@@ -19,6 +19,10 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
 
 public class FormLogin extends AppCompatActivity {
 
@@ -82,6 +86,15 @@ public class FormLogin extends AppCompatActivity {
                     String erro;
                     try {
                         throw task.getException();
+
+                    }catch (FirebaseAuthWeakPasswordException e){
+                        erro = "Digite uma senha com no mínimo 6 caracteres";
+
+                    }catch (FirebaseAuthInvalidCredentialsException e){
+                        erro = "E-mail inválido";
+
+
+
                     }catch (Exception e){
                         erro = "Erro ao logar";
                     }
@@ -92,8 +105,8 @@ public class FormLogin extends AppCompatActivity {
                 }
             }
         })  ;
-
     }
+
 
     private void TelaPrincipal(){
         Intent intent = new Intent(FormLogin.this,TelaPrincipal.class);
