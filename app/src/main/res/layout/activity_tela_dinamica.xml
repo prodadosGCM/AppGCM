@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"
+            tools:context=".TelaDinamica">
+
+            <EditText
+                android:id="@+id/edit_data_Dinamica"
+                style="@style/Edit_Text"
+                android:layout_marginTop="36dp"
+                android:drawableRight="@drawable/dataimagem"
+                android:hint="DATA"
+                android:inputType="date"
+                android:maxLength="10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_telaDinamica" />
+
+            <EditText
+                android:id="@+id/edit_hora_inicio_dinamica"
+                style="@style/Edit_Text"
+                android:layout_marginTop="12dp"
+                android:drawableRight="@drawable/relogioimagem"
+                android:hint="HORA DINÂMICA"
+                android:inputType="time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_data_Dinamica"
+                app:mask="##:##" />
+
+            <Spinner
+                android:id="@+id/spinner_grupamento_dinamica"
+                style="@style/Edit_Text"
+                android:layout_centerHorizontal="true"
+                android:entries="@array/itens_spinner_grupamento"
+                android:layout="@layout/textview_spinner"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_hora_inicio_dinamica" />
+
+            <EditText
+                android:id="@+id/edit_nomeGCM_Dinamica"
+                style="@style/Edit_Text"
+                android:layout_marginTop="12dp"
+                android:hint="NOME DOS GCM's"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner_grupamento_dinamica" />
+
+
+            <EditText
+                android:id="@+id/edit_local_dinamica"
+                style="@style/Edit_Text"
+                android:layout_marginTop="12dp"
+                android:hint="LOCAL(EX. BOLSÃO DA JUJU, PREFEITURA, ETC)"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_nomeGCM_Dinamica" />
+
+
+            <EditText
+                android:id="@+id/edit_endereco_Dinamica"
+                style="@style/Edit_Text"
+                android:layout_marginTop="12dp"
+                android:drawableRight="@drawable/local_endereco"
+                android:hint="ENDEREÇO OCORRÊNCIA"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_local_dinamica" />
+
+
+            <Spinner
+                android:id="@+id/spinnerBairro"
+                style="@style/Edit_Text"
+                android:layout_centerHorizontal="true"
+                android:entries="@array/itens_spinnerBairro"
+                android:layout="@layout/textview_spinner"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_endereco_Dinamica" />
+
+            <Spinner
+                android:id="@+id/spinner_tipo_Dinamica"
+                style="@style/Edit_Text"
+                android:layout_centerHorizontal="true"
+                android:entries="@array/itens_spinner_tipo_Dinamica"
+                android:inputType="textMultiLine"
+                android:layout="@layout/textview_spinner"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinnerBairro" />
+
+
+            <EditText
+                android:id="@+id/edit_Dinamica_Relato"
+                style="@style/Edit_TextObservacao"
+                android:layout_marginTop="12dp"
+                android:hint="RELATO DINÂMICA"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner_tipo_Dinamica" />
+
+            <EditText
+                android:id="@+id/edit_observacao_DINAMICA"
+                style="@style/Edit_TextObservacao"
+                android:layout_marginTop="12dp"
+                android:hint="OBSERVAÇÃO"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_Dinamica_Relato" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_salvar_Dinamica"
+                style="@style/Button"
+                android:layout_marginTop="10dp"
+                android:text="@string/btn_salvar_dinamica"
+                app:layout_constraintEnd_toEndOf="@id/edit_observacao_DINAMICA"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressbar" />
+
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_observacao_DINAMICA" />
+
+            <TextView
+                android:id="@+id/text_telaDinamica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/text_TelaDinamica"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</ScrollView>

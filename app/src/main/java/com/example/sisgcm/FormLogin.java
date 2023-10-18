@@ -3,11 +3,15 @@ package com.example.sisgcm;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -65,7 +69,25 @@ public class FormLogin extends AppCompatActivity {
         });
 
 
-        }
+        //faz o teclado sair quando aperta no enter do edittext senha
+        edit_Senha = findViewById(R.id.edit_senha);
+
+        edit_Senha.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEND) {
+                    // Esconda o teclado
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edit_Senha.getWindowToken(), 0);
+                    return true; // Indica que o evento foi tratado
+                }
+                return false;
+            }
+        });
+
+
+
+    }
 
     private void AutenticarUsuario (View v){
         String matricula = edit_matricula.getText().toString();
@@ -107,6 +129,16 @@ public class FormLogin extends AppCompatActivity {
         })  ;
     }
 
+    // verifica se usuario atual e volta para a tela inicial
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser usuarioatual = FirebaseAuth.getInstance().getCurrentUser();
+         if (usuarioatual != null){
+             TelaPrincipal();
+         }
+    }
 
     private void TelaPrincipal(){
         Intent intent = new Intent(FormLogin.this,TelaPrincipal.class);

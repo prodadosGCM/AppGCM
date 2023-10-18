@@ -1,33 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".TelaPrincipal">
-    
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <View
-        android:id="@+id/containerComponentsCadastro"
-        style="@style/ContainerComponentsBOGCM"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressbar"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_BOGCM"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:context=".TelaPrincipal">
 
-        style="@style/ButtonTelaPrincipal"
-        android:text="@string/btn_principal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/containerComponentsCadastro"
 
-        />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_BOGCM"
 
-    <ProgressBar
+            style="@style/ButtonTelaPrincipal"
+            android:layout_marginTop="40dp"
+            android:text="@string/btn_principal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_Pesquisar"
+
+            style="@style/ButtonTelaPrincipal"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/btn_principalPesquisa"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.853"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_Dinamica"
+
+            style="@style/ButtonTelaPrincipal"
+            android:layout_marginTop="40dp"
+            android:text="@string/btn_PrincipalDinamica"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_BOGCM"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_extra"
+
+            style="@style/ButtonTelaPrincipal"
+            android:layout_marginTop="40dp"
+            android:text="@string/btn_PrincipalExtra"
+            app:layout_constraintHorizontal_bias="0.853"
+            android:layout_marginStart="1dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_Pesquisar"
+            />
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_Id_Funcional"
+
+            style="@style/ButtonTelaPrincipal"
+            android:layout_marginTop="40dp"
+            android:text="@string/btn_PrincipalID_Funcional"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_Dinamica"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_Deslogar"
+
+            style="@style/ButtonTelaPrincipal"
+            android:layout_marginTop="40dp"
+            android:text="@string/btn_PrincipalDeslogar"
+            app:layout_constraintHorizontal_bias="0.853"
+            android:layout_marginStart="1dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_extra"
+            />
+
+
+        <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,10 +108,13 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/containerComponentsCadastro"
+        app:layout_constraintTop_toBottomOf="@id/btn_Pesquisar"
         />
 
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
+</ScrollView>

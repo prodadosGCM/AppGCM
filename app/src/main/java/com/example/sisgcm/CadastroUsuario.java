@@ -10,5 +10,7 @@ public class CadastroUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
+        getSupportActionBar().hide(); //esconder a barra da tela com o nome do programa
+
     }
 }

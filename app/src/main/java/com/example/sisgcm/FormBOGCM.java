@@ -6,11 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Spinner;
 import android.widget.*;
 import android.text.InputType;
@@ -36,6 +41,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
@@ -342,15 +348,16 @@ public class FormBOGCM extends AppCompatActivity {
 
 
 
+
     }//FINAL ON CREATE
 
     //função salvar dados
 
     private void salvarDadosBOGCM(){
 
-        long id;
+        Long id;
         id = System.currentTimeMillis();//id automatica falta colocar para consultar o banco e não repetir
-
+        String idString = Long.toString(id);// transforma em string para nomear o documento com a mesma numeração da id
 
         String dataBogcm = eText.getText().toString();
         String horaInicio = editTextTime.getText().toString();
@@ -367,6 +374,10 @@ public class FormBOGCM extends AppCompatActivity {
         String bairroSelecionado = spinnerBairro.getSelectedItem().toString();
 
 
+        Spinner spinnerGrupamento = findViewById(R.id.spinner_grupamento);
+        String grupamentoSelecionado = spinnerGrupamento.getSelectedItem().toString();
+
+
         // Crie um objeto para armazenar esses dados
         Map<String, Object> dataToSave = new HashMap<>();
         dataToSave.put("id", id);
@@ -377,13 +388,15 @@ public class FormBOGCM extends AppCompatActivity {
         dataToSave.put("TipoOcorrencia", tipoOcorrencia);
         dataToSave.put("Bairro", bairroSelecionado);
         dataToSave.put("comoFoisolicitado", comoFoiSolicitadoSelecionado);
+        dataToSave.put("Grupamento", grupamentoSelecionado);
+
 
         System.currentTimeMillis();
 
         usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         // ...
 
-        DocumentReference documentReference = db.collection("DB_BOGCM").document();
+        DocumentReference documentReference = db.collection("DB_BOGCM").document(idString); // .document(idString) coloca o nr da id no documento
         documentReference.set(dataToSave)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -400,6 +413,15 @@ public class FormBOGCM extends AppCompatActivity {
                 });
     }// final da funçAo salvar
 
+    @Override
+    public void onBackPressed() {
+
+        // Ou, para retornar à tela anterior (activity anterior), você pode usar o Intent:
+        Intent intent = new Intent(this, TelaPrincipal.class); // Substitua TelaAnterior pela classe da sua atividade anterior
+        startActivity(intent);
+        finish(); // Finaliza a atividade atual
+    }
+
 
 
     //FUNÇÃO DO AUTO COMPLETE TIPO OCORRENCIA
@@ -411,6 +433,7 @@ public class FormBOGCM extends AppCompatActivity {
         }
         return false;
     }
+
 
 }//FINAL PUBLIC CLASS
 
