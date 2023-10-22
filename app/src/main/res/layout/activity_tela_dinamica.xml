@@ -73,7 +73,7 @@
                 style="@style/Edit_Text"
                 android:layout_marginTop="12dp"
                 android:hint="LOCAL(EX. BOLSÃO DA JUJU, PREFEITURA, ETC)"
-                android:inputType="number"
+                android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
 
 
             <Spinner
-                android:id="@+id/spinnerBairro"
+                android:id="@+id/spinnerBairroDinamica"
                 style="@style/Edit_Text"
                 android:layout_centerHorizontal="true"
                 android:entries="@array/itens_spinnerBairro"
@@ -114,7 +114,7 @@
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spinnerBairro" />
+                app:layout_constraintTop_toBottomOf="@id/spinnerBairroDinamica" />
 
 
             <EditText
@@ -140,10 +140,10 @@
                 app:layout_constraintTop_toBottomOf="@id/edit_Dinamica_Relato" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_salvar_Dinamica"
+                android:id="@+id/btn_enviar_Dinamica"
                 style="@style/Button"
                 android:layout_marginTop="10dp"
-                android:text="@string/btn_salvar_dinamica"
+                android:text="@string/btn_enviar_dinamica"
                 app:layout_constraintEnd_toEndOf="@id/edit_observacao_DINAMICA"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

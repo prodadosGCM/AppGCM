@@ -11,19 +11,23 @@
     <string name="btn_PrincipalDeslogar">DESLOGAR</string>
 
 
-
     <string name="text_BOGCMComOcorrencia">Comunicado da ocorrência</string>
     <string name="text_TelaDinamica">Dinâmica</string>
 
     <string name="text_BOGCMLocalOcorrencia">Local da ocorrência</string>
-    <string name="text_BOGCMObservacao">Relato Sucinto/Observação</string>
+    <string name="text_BOGCMObservacao">Dinâmica da ocorrência/Observação</string>
+    <string name="text_BOGCMencaminhamentoOrgao">Encaminhamento para outros orgãos</string>
+
     <string name="text_BOGCMQualificaçãoQ1">Qualificação das partes envolvidas - Q1</string>
     <string name="text_BOGCMQualificaçãoQ2">Qualificação das partes envolvidas - Q2</string>
+    <string name="text_BOGCMCondutorOcorrencia">GCMs condutores da ocorrência</string>
+    <string name="text_BOGCMEquipedeApoio">Equipe de apoio</string>
+
     <string name="text_BOGCMfinalizacaoOcorrencia">Finalização da ocorrência</string>
 
 
     <string name="btn_avancaComOcorrencia">AVANÇAR</string>
-    <string name="btn_salvar_dinamica">SALVAR</string>
+    <string name="btn_enviar_dinamica">ENVIAR</string>
 
 
     <string-array name="itens_spinner">
@@ -135,15 +139,15 @@
         <item>QUEDA (ÁRVORE NA VIA)</item>
         <item>QUEDA (FIO DE ALTA TENSÃO NA VIA)</item>
         <item>VEÍCULO ABANDONADO NA VIA</item>
-        <item>VEÍCULO ESTACIONADO IRREGULARMENTE(ESPECIFICAR NA OBSERVAÇÃO)</item>
+        <item>VEÍCULO ESTACIONADO IRREGULARMENTE(ESPECIFICAR NO RELATO)</item>
         <item>COBRANÇA IRREGULAR DE ESTACIONAMENTO (FLANELAGEM)</item>
         <item>DESACATO AO SERVIDOR PÚBLICO</item>
         <item>FURTO</item>
         <item>IMPORTUNAÇÃO</item>
         <item>MEDIAÇÃO DE CONFLITO</item>
         <item>RECUPERAÇÃO DE VEÍCULO ROUBADO</item>
-        <item>RELACIONADO À POPULAÇÃO DE RUA(ESPECIFICAR NA OBSERVAÇÃO)</item>
-        <item>SOM ALTO (ESPECIFICAR NA OBSERVAÇÃO)</item>
+        <item>RELACIONADO À POPULAÇÃO DE RUA(ESPECIFICAR NO RELATO)</item>
+        <item>SOM ALTO (ESPECIFICAR NO RELATO)</item>
         <item>CONSTRUÇÃO EM ÁREA DE PRESERVAÇÃO</item>
         <item>CORTE ILEGAL DE ÁRVORE</item>
         <item>CRIME AMBIENTAL (ESPECIFICAR NA OSERVAÇÃO)</item>
@@ -152,18 +156,25 @@
         <item>ALTINHA</item>
         <item>FRESCOBOL</item>
         <item>FUTEBOL</item>
-        <item>AUXILIO AO CIDADÃO (ESPECIFICAR NA OBSERVAÇÃO)</item>
+        <item>AUXILIO AO CIDADÃO (ESPECIFICAR NO RELATO)</item>
         <item>AUXÍLIO NA LOCALIZAÇÃO DE FAMILIAR</item>
         <item>CRIANÇA PERDIDA</item>
         <item>OPERAÇÃO EM CONJUNTO COM A PMERJ</item>
         <item>OPERAÇÃO EM CONJUNTO COM O DETRAN</item>
-        <item>OPERAÇÃO EM CONJUNTO COM OUTRA SECRETARIA(ESPEC. OBSERVAÇÃO)</item>
+        <item>OPERAÇÃO EM CONJUNTO COM OUTRA SECRETARIA(ESPEC. NO RELATO)</item>
         <item>SUPORTE AO CIDADÃO EM SURTO</item>
         <item>VIOLÊNCIA DOMÉSTICA (LEI MARIA DA PENHA)</item>
-        <item>OUTROS (ESPECIFICAR NA OBSERVAÇÃO)</item>
+        <item>OUTROS (ESPECIFICAR NO RELATO)</item>
 
     </string-array>
 
+    <string-array name="itens_spinner_encaminhamento_orgao">
+        <item>SELECIONE UMA DAS OPÇÕES?</item>
+        <item>DELEGACIA</item>
+        <item>IML</item>
+        <item>UPA</item>
+        <item>OUTRO (DESCREVER NA OBSERVAÇÃO)</item>
+    </string-array>
 
 
 </resources>

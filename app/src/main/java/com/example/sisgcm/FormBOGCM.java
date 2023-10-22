@@ -46,6 +46,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -66,6 +67,15 @@ public class FormBOGCM extends AppCompatActivity {
     TimePickerDialog pickertimeHoraFinal;//relogio hora final
     EditText editTextTimehorafinal; //relogio hora final
 
+    EditText editTextEndereco, editTextNrdoEndereco, editTextComplementoEndereco,
+            editTextPontoReferencia,editTextRelatoObservacao, editTextMaterialRecolApreendido,
+            editTextNomeQ1,editTextNomeQ2,editTextCpfQ1, editTextCpfq2, editTextTelefoneQ1,
+            editTextTelefoneQ2,editTextHoraChegadaOutroOrgao, editTextHoraSaidaOutroOrgao,
+            editTextNrRegistroOutroOrgao,editTextNomeGCMCondutorOcorrencia, editTextNomeGCMApoioOcorrencia;
+
+    TimePickerDialog pickertimeHoraChegadaOutroOrgao, pickertimeHoraSaidaOutroOrgao;//relogio hora chegada outro orgao
+
+
     //AUTO COMPLETE TIPO OCORRENCIA
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> autoCompleteAdapter;
@@ -83,8 +93,25 @@ public class FormBOGCM extends AppCompatActivity {
         getSupportActionBar().hide(); //esconder a barra da tela com o nome do programa
 
         db = FirebaseFirestore.getInstance();
-        btn_ComOcorrencia=findViewById(R.id.btn_ComOcorrencia);
 
+        //inicializar os edittext
+        editTextEndereco=findViewById(R.id.edit_endereco);
+        editTextNrdoEndereco=findViewById(R.id.edit_nr_endereco);
+        editTextComplementoEndereco=findViewById(R.id.edit_complemento);
+        editTextPontoReferencia=findViewById(R.id.edit_PontoReferencia);
+        editTextRelatoObservacao=findViewById(R.id.edit_observacao);
+        editTextMaterialRecolApreendido=findViewById(R.id.edit_MaterialApreendido);
+        editTextNomeQ1=findViewById(R.id.edit_nome_Q1);
+        editTextNomeQ2=findViewById(R.id.edit_nome_Q2);
+        editTextCpfQ1=findViewById(R.id.edit_CPF_Q1);
+        editTextCpfq2=findViewById(R.id.edit_CPF_Q2);
+        editTextTelefoneQ1=findViewById(R.id.edit_telefone_Q1);
+        editTextTelefoneQ2=findViewById(R.id.edit_telefone_Q2);
+        editTextNrRegistroOutroOrgao=findViewById(R.id.edit_nr_registro_EncaminhamentoOrgao);
+        editTextNomeGCMCondutorOcorrencia=findViewById(R.id.edit_nomeGCM);
+        editTextNomeGCMApoioOcorrencia=findViewById(R.id.edit_nomeGCM_EquipeAPoio);
+
+        btn_ComOcorrencia=findViewById(R.id.btn_ComOcorrencia);
         btn_ComOcorrencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,6 +207,63 @@ public class FormBOGCM extends AppCompatActivity {
             }
         });
 //fim do relogio hora final
+
+        // inicio do relogio hora chegada outro orgao
+        editTextHoraChegadaOutroOrgao=(EditText) findViewById(R.id.edit_hora_chegada_encaminhamentoorgao);
+        editTextHoraChegadaOutroOrgao.setInputType(InputType.TYPE_NULL);
+        editTextHoraChegadaOutroOrgao.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                int minute = cldr.get(Calendar.MINUTE);
+                // time picker dialog
+                pickertimeHoraChegadaOutroOrgao = new TimePickerDialog(FormBOGCM.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
+                                editTextHoraChegadaOutroOrgao.setText(selectedTime);
+                            }
+                        },
+                        hour,
+                        minute,
+                        true
+                );
+                pickertimeHoraChegadaOutroOrgao.show();
+            }
+        });
+//fim do relogio hora chegada outro orgao
+
+
+        // inicio do relogio hora saida outro orgao
+        editTextHoraSaidaOutroOrgao=(EditText) findViewById(R.id.edit_hora_saida_encaminhamentoorgao);
+        editTextHoraSaidaOutroOrgao.setInputType(InputType.TYPE_NULL);
+        editTextHoraSaidaOutroOrgao.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                int minute = cldr.get(Calendar.MINUTE);
+                // time picker dialog
+                pickertimeHoraSaidaOutroOrgao = new TimePickerDialog(FormBOGCM.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
+                                editTextHoraSaidaOutroOrgao.setText(selectedTime);
+                            }
+                        },
+                        hour,
+                        minute,
+                        true
+                );
+                pickertimeHoraSaidaOutroOrgao.show();
+            }
+        });
+//fim do relogio hora saida outro orgao
 
 //inicio da spinner como foi solicitado
         Spinner spinner = findViewById(R.id.spinnercomo);
@@ -313,6 +397,62 @@ public class FormBOGCM extends AppCompatActivity {
         }); //final da spinner grupamento
 
 
+        //inicio da spinner outro orgao
+        Spinner spinnerOutroOrgao = findViewById(R.id.spinner_encaminhamento_orgao);
+        ArrayAdapter<CharSequence> adapterOutroOrgao = ArrayAdapter.createFromResource(
+                this,
+                R.array.itens_spinner_encaminhamento_orgao,
+                android.R.layout.simple_spinner_item
+        );
+        adapterOutroOrgao.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOutroOrgao.setAdapter(adapterOutroOrgao);
+        spinnerOutroOrgao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                String selectedItem = parentView.getItemAtPosition(position).toString();
+                // Toast.makeText(getApplicationContext(), "Selecionado: " + selectedItem, Toast.LENGTH_SHORT).show(); //código para exibir item selecionado
+// Defina a cor do item selecionado para preto
+                if (selectedItemView != null && selectedItemView instanceof TextView) {
+                    ((TextView) selectedItemView).setTextColor(Color.BLACK);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Ação a ser executada quando nada é selecionado
+            }
+        }); //final da spinner outro orgao
+
+
+        //inicio da spinner grupamento apoio
+        Spinner spinnerGrupamentoApoio = findViewById(R.id.spinner_grupamentoEquipeApoio);
+        ArrayAdapter<CharSequence> adapterGrupamentoApoio = ArrayAdapter.createFromResource(
+                this,
+                R.array.itens_spinner_grupamento,
+                android.R.layout.simple_spinner_item
+        );
+        adapterGrupamentoApoio.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGrupamentoApoio.setAdapter(adapterGrupamentoApoio);
+        spinnerGrupamentoApoio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                String selectedItem = parentView.getItemAtPosition(position).toString();
+                // Toast.makeText(getApplicationContext(), "Selecionado: " + selectedItem, Toast.LENGTH_SHORT).show(); //código para exibir item selecionado
+// Defina a cor do item selecionado para preto
+                if (selectedItemView != null && selectedItemView instanceof TextView) {
+                    ((TextView) selectedItemView).setTextColor(Color.BLACK);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Ação a ser executada quando nada é selecionado
+            }
+        }); //final da spinner grupamento apoio
+
+
+
+
 // INICIO DO AUTO COMPLETE TIPO OCORRENCIA
         // Inicialize o AutoCompleteTextView
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
@@ -362,6 +502,23 @@ public class FormBOGCM extends AppCompatActivity {
         String dataBogcm = eText.getText().toString();
         String horaInicio = editTextTime.getText().toString();
         String horaFinal = editTextTimehorafinal.getText().toString();
+        String horaChegadaOutroOrgao = editTextHoraChegadaOutroOrgao.getText().toString();
+        String horaSaidaOutroOrgao = editTextHoraSaidaOutroOrgao.getText().toString();
+        String endereco = editTextEndereco.getText().toString();
+        String nrEndereco = editTextNrdoEndereco.getText().toString();
+        String complementoEnd = editTextComplementoEndereco.getText().toString();
+        String pontoReferencia = editTextPontoReferencia.getText().toString();
+        String relatoObservacao = editTextRelatoObservacao.getText().toString();
+        String materialRecApreendido = editTextMaterialRecolApreendido.getText().toString();
+        String nomeQ1 = editTextNomeQ1.getText().toString();
+        String nomeq2 = editTextNomeQ2.getText().toString();
+        String cpfQ1 = editTextCpfQ1.getText().toString();
+        String cpfQ2 = editTextCpfq2.getText().toString();
+        String telefoneQ1 = editTextTelefoneQ1.getText().toString();
+        String telefoneq2 = editTextTelefoneQ2.getText().toString();
+        String nrRegistroOutroOrgao = editTextNrRegistroOutroOrgao.getText().toString();
+        String nomeGCMCondutorOcorrencia = editTextNomeGCMCondutorOcorrencia.getText().toString();
+        String nomeGCMApoioOcorrencia = editTextNomeGCMApoioOcorrencia.getText().toString();
 
         //gravar dados autocomplete
         String tipoOcorrencia = autoCompleteTextView.getText().toString();
@@ -373,22 +530,64 @@ public class FormBOGCM extends AppCompatActivity {
         Spinner spinnerBairro = findViewById(R.id.spinnerBairro);
         String bairroSelecionado = spinnerBairro.getSelectedItem().toString();
 
-
         Spinner spinnerGrupamento = findViewById(R.id.spinner_grupamento);
         String grupamentoSelecionado = spinnerGrupamento.getSelectedItem().toString();
+
+        Spinner spinnerQualificacao1 = findViewById(R.id.spinner_qualificacao_q1);
+        String qualificacao1Selecionado = spinnerQualificacao1.getSelectedItem().toString();
+
+        Spinner spinnerQualificacao2 = findViewById(R.id.spinner_qualificacao_q2);
+        String qualificacao2Selecionado = spinnerQualificacao2.getSelectedItem().toString();
+
+        Spinner spinnerOutroOrgao = findViewById(R.id.spinner_encaminhamento_orgao);
+        String outroOrgaoSelecionado = spinnerOutroOrgao.getSelectedItem().toString();
+
+        Spinner spinnerGrupamentoApoio = findViewById(R.id.spinner_grupamentoEquipeApoio);
+        String grupamentoApoioSelecionado = spinnerGrupamentoApoio.getSelectedItem().toString();
 
 
         // Crie um objeto para armazenar esses dados
         Map<String, Object> dataToSave = new HashMap<>();
         dataToSave.put("id", id);
 
+        //salvar edittext
         dataToSave.put("data", dataBogcm);
         dataToSave.put("horaInicio", horaInicio);
         dataToSave.put("horaFinal", horaFinal);
         dataToSave.put("TipoOcorrencia", tipoOcorrencia);
+
+        dataToSave.put("horaChegadaOutroOrgao", horaChegadaOutroOrgao);
+        dataToSave.put("horaSaidaOutroOrgao", horaSaidaOutroOrgao);
+        dataToSave.put("endereco", endereco);
+        dataToSave.put("nrEndereco", nrEndereco);
+        dataToSave.put("complementoendereco", complementoEnd);
+        dataToSave.put("pontoReferencia", pontoReferencia);
+        dataToSave.put("RelatoObsevacao", relatoObservacao);
+        dataToSave.put("materialRecolhidoApreendido", materialRecApreendido);
+        dataToSave.put("nomeQ1", nomeQ1);
+        dataToSave.put("nomeQ2", nomeq2);
+        dataToSave.put("cpfQ1", cpfQ1);
+        dataToSave.put("cpfQ2", cpfQ2);
+        dataToSave.put("telefoneQ1", telefoneQ1);
+        dataToSave.put("TelefoneQ2", telefoneq2);
+        dataToSave.put("nrRegistroOutroOrgao", nrRegistroOutroOrgao);
+        dataToSave.put("nomeGcmCondutorOcorrencia", nomeGCMCondutorOcorrencia);
+        dataToSave.put("nomeGcmApoioOcorrencia", nomeGCMApoioOcorrencia);
+
+        // salvar spinner
         dataToSave.put("Bairro", bairroSelecionado);
         dataToSave.put("comoFoisolicitado", comoFoiSolicitadoSelecionado);
-        dataToSave.put("Grupamento", grupamentoSelecionado);
+        dataToSave.put("GrupamentoCondutorOcorrencia", grupamentoSelecionado);
+        dataToSave.put("qualificacaoQ1",qualificacao1Selecionado);
+        dataToSave.put("qualificacaoQ2", qualificacao2Selecionado);
+        dataToSave.put("encaminhamentoOutroOrgao", outroOrgaoSelecionado);
+        dataToSave.put("grupamentoApoio", grupamentoApoioSelecionado);
+
+
+
+        //salvar data e hora cadastro
+        dataToSave.put("dataHoraCadastro", FieldValue.serverTimestamp());
+
 
 
         System.currentTimeMillis();

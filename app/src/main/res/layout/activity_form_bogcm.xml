@@ -141,19 +141,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinnerBairro" />
 
-        <Spinner
-            android:id="@+id/spinner_tipo_ocorrencia"
-            style="@style/Edit_Text"
-            android:layout_centerHorizontal="true"
-            android:entries="@array/itens_spinner_tipo_ocorrencia"
-            android:layout="@layout/textview_spinner"
-            android:spinnerMode="dropdown"
-            android:inputType="textMultiLine"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMObservacao" />
-
 
         <EditText
             android:id="@+id/edit_observacao"
@@ -164,7 +151,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinner_tipo_ocorrencia" />
+            app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView" />
+
+        <EditText
+            android:id="@+id/edit_MaterialApreendido"
+            style="@style/Edit_TextObservacao"
+            android:layout_marginTop="12dp"
+            android:hint="MATERIAL RECOLHIDO/APREENDIDO"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_observacao" />
+
 
         <TextView
             android:id="@+id/text_telaBOGCMQualificacaoQ1"
@@ -178,7 +177,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_observacao" />
+            app:layout_constraintTop_toBottomOf="@id/edit_MaterialApreendido" />
 
         <EditText
             android:id="@+id/edit_nome_Q1"
@@ -292,12 +291,12 @@
             app:layout_constraintTop_toBottomOf="@id/edit_telefone_Q2" />
 
         <TextView
-            android:id="@+id/text_telaBOGCMfinalizacaoOcorrencia"
+            android:id="@+id/text_telaBOGCMEncaminhamentoOrgao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
-            android:text="@string/text_BOGCMfinalizacaoOcorrencia"
+            android:text="@string/text_BOGCMencaminhamentoOrgao"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -305,16 +304,79 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner_qualificacao_q2" />
 
+        <Spinner
+            android:id="@+id/spinner_encaminhamento_orgao"
+            style="@style/Edit_Text"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/itens_spinner_encaminhamento_orgao"
+            android:layout="@layout/textview_spinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMEncaminhamentoOrgao" />
+
+        <EditText
+            android:id="@+id/edit_hora_chegada_encaminhamentoorgao"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/relogioimagem"
+            android:hint="HORA CHEGADA NO LOCAL"
+            android:inputType="time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_encaminhamento_orgao"
+            app:mask="##:##" />
+
+        <EditText
+            android:id="@+id/edit_hora_saida_encaminhamentoorgao"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/relogioimagem"
+            android:hint="HORA SAÍDA DO LOCAL"
+            android:inputType="time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_hora_chegada_encaminhamentoorgao"
+            app:mask="##:##" />
+
+        <EditText
+            android:id="@+id/edit_nr_registro_EncaminhamentoOrgao"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="NR DO REGISTRO DO ORGÃO"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_hora_saida_encaminhamentoorgao" />
+
+
+        <TextView
+            android:id="@+id/text_telaBOGCMCondutorOcorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMCondutorOcorrencia"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_nr_registro_EncaminhamentoOrgao" />
+
         <EditText
             android:id="@+id/edit_nomeGCM"
             style="@style/Edit_Text"
             android:layout_marginTop="12dp"
-            android:hint="NOME DOS GCM's"
-            android:inputType="text"
+            android:hint="NOME GCM's(CONDUTORES DA OCORRÊNCIA)"
+            android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMfinalizacaoOcorrencia" />
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMCondutorOcorrencia" />
 
         <Spinner
             android:id="@+id/spinner_grupamento"
@@ -327,11 +389,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_nomeGCM" />
 
+        <TextView
+            android:id="@+id/text_telaBOGCMEquipedeApoio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMEquipedeApoio"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_grupamento" />
+
+        <EditText
+            android:id="@+id/edit_nomeGCM_EquipeAPoio"
+            style="@style/Edit_Text"
+            android:layout_marginTop="12dp"
+            android:hint="NOME GCM's(EQUIPE DE APOIO)"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMEquipedeApoio" />
+
+        <Spinner
+            android:id="@+id/spinner_grupamentoEquipeApoio"
+            style="@style/Edit_Text"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/itens_spinner_grupamento"
+            android:layout="@layout/textview_spinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_nomeGCM_EquipeAPoio" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ComOcorrencia"
             style="@style/Button"
-            android:layout_marginTop="350dp"
+            android:layout_marginTop="15dp"
             android:text="@string/btn_avancaComOcorrencia"
             app:layout_constraintEnd_toEndOf="@id/edit_hora_final"
             app:layout_constraintHorizontal_bias="0.0"
@@ -348,7 +445,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinner_grupamento"
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMfinalizacaoOcorrencia"
             app:mask="##:##" />
 
         <AutoCompleteTextView
@@ -362,8 +459,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_hora_final" />
+            app:layout_constraintTop_toBottomOf="@id/text_telaBOGCMObservacao" />
         />
+
+        <TextView
+            android:id="@+id/text_telaBOGCMfinalizacaoOcorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/text_BOGCMfinalizacaoOcorrencia"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_grupamentoEquipeApoio" />
 
 
         <ProgressBar
@@ -389,7 +500,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

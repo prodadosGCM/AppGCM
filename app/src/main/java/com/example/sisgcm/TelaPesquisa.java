@@ -29,7 +29,9 @@ public class TelaPesquisa extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Recupere as informações do Firestore (substitua com sua lógica)
-                String informationToShare = "Informações do Firestore: ...";
+                String informationToShare = "SEDHSEG\nGuarda Civil Municipal.\n" ;
+                //String informationToShare = "Texto do EditText 1: ""\nTexto do EditText 2: " + editText2Text;
+                //adaptar a mensagem para compartilhar
 
                 // Crie uma intenção para compartilhar via WhatsApp
                 Intent sendIntent = new Intent();
