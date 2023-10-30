@@ -1,14 +1,32 @@
 package com.example.sisgcm;
 
 public class BoGCM {
-    private String dataBOGCM, horaInicio, horaFinal, comoFoiSolicitado, endereco, nrEndereco, complemento, pontoReferencia, bairro,tipoOcorrenci, relatoSucinto, nomeQ1,cpfQ1, telefoneQ1, qualificacaoQ1, nomeQ2,cpfQ2, telefoneQ2, qualificacaoQ2, nomesGCM, grupamentoBOGCM;
 
-    public String getDataBOGCM() {
-        return dataBOGCM;
+    private String idBOGCM,data, horaInicio, horaFinal,comoFoisolicitado, endereco,
+            nrEndereco, complementoendereco, pontoReferencia, bairro, tipoOcorrencia,
+        relatoObsevacao, materialRecolhidoApreendido, cpfQ1, nomeQ1, telefoneQ1,
+    cpfQ2, nomeQ2, telefoneQ2, encaminhamentoOutroOrgao, horaChegadaOutroOrgao, horaSaidaOutroOrgao,
+    nrRegistroOutroOrgao, nomeGcmCondutorOcorrencia, grupamentoCondutorOcorrencia, nomeGcmApoioOcorrencia,
+    grupamentoApoio, dataHoraCadastro, idUsuarioRegistrou;
+
+    public BoGCM(){
+        super();
     }
 
-    public void setDataBOGCM(String dataBOGCM) {
-        this.dataBOGCM = dataBOGCM;
+    public String getIdBOGCM() {
+        return idBOGCM;
+    }
+
+    public void setIdBOGCM(String idBOGCM) {
+        this.idBOGCM = idBOGCM;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getHoraInicio() {
@@ -27,12 +45,12 @@ public class BoGCM {
         this.horaFinal = horaFinal;
     }
 
-    public String getComoFoiSolicitado() {
-        return comoFoiSolicitado;
+    public String getComoFoisolicitado() {
+        return comoFoisolicitado;
     }
 
-    public void setComoFoiSolicitado(String comoFoiSolicitado) {
-        this.comoFoiSolicitado = comoFoiSolicitado;
+    public void setComoFoisolicitado(String comoFoisolicitado) {
+        this.comoFoisolicitado = comoFoisolicitado;
     }
 
     public String getEndereco() {
@@ -51,12 +69,12 @@ public class BoGCM {
         this.nrEndereco = nrEndereco;
     }
 
-    public String getComplemento() {
-        return complemento;
+    public String getComplementoendereco() {
+        return complementoendereco;
     }
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
+    public void setComplementoendereco(String complementoendereco) {
+        this.complementoendereco = complementoendereco;
     }
 
     public String getPontoReferencia() {
@@ -75,28 +93,28 @@ public class BoGCM {
         this.bairro = bairro;
     }
 
-    public String getTipoOcorrenci() {
-        return tipoOcorrenci;
+    public String getTipoOcorrencia() {
+        return tipoOcorrencia;
     }
 
-    public void setTipoOcorrenci(String tipoOcorrenci) {
-        this.tipoOcorrenci = tipoOcorrenci;
+    public void setTipoOcorrencia(String tipoOcorrencia) {
+        this.tipoOcorrencia = tipoOcorrencia;
     }
 
-    public String getRelatoSucinto() {
-        return relatoSucinto;
+    public String getRelatoObsevacao() {
+        return relatoObsevacao;
     }
 
-    public void setRelatoSucinto(String relatoSucinto) {
-        this.relatoSucinto = relatoSucinto;
+    public void setRelatoObsevacao(String relatoObsevacao) {
+        this.relatoObsevacao = relatoObsevacao;
     }
 
-    public String getNomeQ1() {
-        return nomeQ1;
+    public String getMaterialRecolhidoApreendido() {
+        return materialRecolhidoApreendido;
     }
 
-    public void setNomeQ1(String nomeQ1) {
-        this.nomeQ1 = nomeQ1;
+    public void setMaterialRecolhidoApreendido(String materialRecolhidoApreendido) {
+        this.materialRecolhidoApreendido = materialRecolhidoApreendido;
     }
 
     public String getCpfQ1() {
@@ -107,28 +125,20 @@ public class BoGCM {
         this.cpfQ1 = cpfQ1;
     }
 
+    public String getNomeQ1() {
+        return nomeQ1;
+    }
+
+    public void setNomeQ1(String nomeQ1) {
+        this.nomeQ1 = nomeQ1;
+    }
+
     public String getTelefoneQ1() {
         return telefoneQ1;
     }
 
     public void setTelefoneQ1(String telefoneQ1) {
         this.telefoneQ1 = telefoneQ1;
-    }
-
-    public String getQualificacaoQ1() {
-        return qualificacaoQ1;
-    }
-
-    public void setQualificacaoQ1(String qualificacaoQ1) {
-        this.qualificacaoQ1 = qualificacaoQ1;
-    }
-
-    public String getNomeQ2() {
-        return nomeQ2;
-    }
-
-    public void setNomeQ2(String nomeQ2) {
-        this.nomeQ2 = nomeQ2;
     }
 
     public String getCpfQ2() {
@@ -139,6 +149,14 @@ public class BoGCM {
         this.cpfQ2 = cpfQ2;
     }
 
+    public String getNomeQ2() {
+        return nomeQ2;
+    }
+
+    public void setNomeQ2(String nomeQ2) {
+        this.nomeQ2 = nomeQ2;
+    }
+
     public String getTelefoneQ2() {
         return telefoneQ2;
     }
@@ -147,31 +165,150 @@ public class BoGCM {
         this.telefoneQ2 = telefoneQ2;
     }
 
-    public String getQualificacaoQ2() {
-        return qualificacaoQ2;
+    public String getEncaminhamentoOutroOrgao() {
+        return encaminhamentoOutroOrgao;
     }
 
-    public void setQualificacaoQ2(String qualificacaoQ2) {
-        this.qualificacaoQ2 = qualificacaoQ2;
+    public void setEncaminhamentoOutroOrgao(String encaminhamentoOutroOrgao) {
+        this.encaminhamentoOutroOrgao = encaminhamentoOutroOrgao;
     }
 
-    public String getNomesGCM() {
-        return nomesGCM;
+    public String getHoraChegadaOutroOrgao() {
+        return horaChegadaOutroOrgao;
     }
 
-    public void setNomesGCM(String nomesGCM) {
-        this.nomesGCM = nomesGCM;
+    public void setHoraChegadaOutroOrgao(String horaChegadaOutroOrgao) {
+        this.horaChegadaOutroOrgao = horaChegadaOutroOrgao;
     }
 
-    public String getGrupamentoBOGCM() {
-        return grupamentoBOGCM;
+    public String getHoraSaidaOutroOrgao() {
+        return horaSaidaOutroOrgao;
     }
 
-    public void setGrupamentoBOGCM(String grupamentoBOGCM) {
-        this.grupamentoBOGCM = grupamentoBOGCM;
+    public void setHoraSaidaOutroOrgao(String horaSaidaOutroOrgao) {
+        this.horaSaidaOutroOrgao = horaSaidaOutroOrgao;
     }
 
-    public BoGCM(){
+    public String getNrRegistroOutroOrgao() {
+        return nrRegistroOutroOrgao;
+    }
 
+    public void setNrRegistroOutroOrgao(String nrRegistroOutroOrgao) {
+        this.nrRegistroOutroOrgao = nrRegistroOutroOrgao;
+    }
+
+    public String getNomeGcmCondutorOcorrencia() {
+        return nomeGcmCondutorOcorrencia;
+    }
+
+    public void setNomeGcmCondutorOcorrencia(String nomeGcmCondutorOcorrencia) {
+        this.nomeGcmCondutorOcorrencia = nomeGcmCondutorOcorrencia;
+    }
+
+    public String getGrupamentoCondutorOcorrencia() {
+        return grupamentoCondutorOcorrencia;
+    }
+
+    public void setGrupamentoCondutorOcorrencia(String grupamentoCondutorOcorrencia) {
+        this.grupamentoCondutorOcorrencia = grupamentoCondutorOcorrencia;
+    }
+
+    public String getNomeGcmApoioOcorrencia() {
+        return nomeGcmApoioOcorrencia;
+    }
+
+    public void setNomeGcmApoioOcorrencia(String nomeGcmApoioOcorrencia) {
+        this.nomeGcmApoioOcorrencia = nomeGcmApoioOcorrencia;
+    }
+
+    public String getGrupamentoApoio() {
+        return grupamentoApoio;
+    }
+
+    public void setGrupamentoApoio(String grupamentoApoio) {
+        this.grupamentoApoio = grupamentoApoio;
+    }
+
+    public String getDataHoraCadastro() {
+        return dataHoraCadastro;
+    }
+
+    public void setDataHoraCadastro(String dataHoraCadastro) {
+        this.dataHoraCadastro = dataHoraCadastro;
+    }
+
+    public String getIdUsuarioRegistrou() {
+        return idUsuarioRegistrou;
+    }
+
+    public void setIdUsuarioRegistrou(String idUsuarioRegistrou) {
+        this.idUsuarioRegistrou = idUsuarioRegistrou;
+    }
+
+    public BoGCM(String idBOGCM, String data, String horaInicio, String horaFinal, String comoFoisolicitado, String endereco, String nrEndereco, String complementoendereco, String pontoReferencia, String bairro, String tipoOcorrencia, String relatoObsevacao, String materialRecolhidoApreendido, String cpfQ1, String nomeQ1, String telefoneQ1, String cpfQ2, String nomeQ2, String telefoneQ2, String encaminhamentoOutroOrgao, String horaChegadaOutroOrgao, String horaSaidaOutroOrgao, String nrRegistroOutroOrgao, String nomeGcmCondutorOcorrencia, String grupamentoCondutorOcorrencia, String nomeGcmApoioOcorrencia, String grupamentoApoio, String dataHoraCadastro, String idUsuarioRegistrou) {
+        this.idBOGCM = idBOGCM;
+        this.data = data;
+        this.horaInicio = horaInicio;
+        this.horaFinal = horaFinal;
+        this.comoFoisolicitado = comoFoisolicitado;
+        this.endereco = endereco;
+        this.nrEndereco = nrEndereco;
+        this.complementoendereco = complementoendereco;
+        this.pontoReferencia = pontoReferencia;
+        this.bairro = bairro;
+        this.tipoOcorrencia = tipoOcorrencia;
+        this.relatoObsevacao = relatoObsevacao;
+        this.materialRecolhidoApreendido = materialRecolhidoApreendido;
+        this.cpfQ1 = cpfQ1;
+        this.nomeQ1 = nomeQ1;
+        this.telefoneQ1 = telefoneQ1;
+        this.cpfQ2 = cpfQ2;
+        this.nomeQ2 = nomeQ2;
+        this.telefoneQ2 = telefoneQ2;
+        this.encaminhamentoOutroOrgao = encaminhamentoOutroOrgao;
+        this.horaChegadaOutroOrgao = horaChegadaOutroOrgao;
+        this.horaSaidaOutroOrgao = horaSaidaOutroOrgao;
+        this.nrRegistroOutroOrgao = nrRegistroOutroOrgao;
+        this.nomeGcmCondutorOcorrencia = nomeGcmCondutorOcorrencia;
+        this.grupamentoCondutorOcorrencia = grupamentoCondutorOcorrencia;
+        this.nomeGcmApoioOcorrencia = nomeGcmApoioOcorrencia;
+        this.grupamentoApoio = grupamentoApoio;
+        this.dataHoraCadastro = dataHoraCadastro;
+        this.idUsuarioRegistrou = idUsuarioRegistrou;
+    }
+
+    @Override
+    public String toString() {
+        return "BoGCM{" +
+                "idBOGCM='" + idBOGCM + '\'' +
+                ", data='" + data + '\'' +
+                ", horaInicio='" + horaInicio + '\'' +
+                ", horaFinal='" + horaFinal + '\'' +
+                ", comoFoisolicitado='" + comoFoisolicitado + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", nrEndereco='" + nrEndereco + '\'' +
+                ", complementoendereco='" + complementoendereco + '\'' +
+                ", pontoReferencia='" + pontoReferencia + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", tipoOcorrencia='" + tipoOcorrencia + '\'' +
+                ", relatoObsevacao='" + relatoObsevacao + '\'' +
+                ", materialRecolhidoApreendido='" + materialRecolhidoApreendido + '\'' +
+                ", cpfQ1='" + cpfQ1 + '\'' +
+                ", nomeQ1='" + nomeQ1 + '\'' +
+                ", telefoneQ1='" + telefoneQ1 + '\'' +
+                ", cpfQ2='" + cpfQ2 + '\'' +
+                ", nomeQ2='" + nomeQ2 + '\'' +
+                ", telefoneQ2='" + telefoneQ2 + '\'' +
+                ", encaminhamentoOutroOrgao='" + encaminhamentoOutroOrgao + '\'' +
+                ", horaChegadaOutroOrgao='" + horaChegadaOutroOrgao + '\'' +
+                ", horaSaidaOutroOrgao='" + horaSaidaOutroOrgao + '\'' +
+                ", nrRegistroOutroOrgao='" + nrRegistroOutroOrgao + '\'' +
+                ", nomeGcmCondutorOcorrencia='" + nomeGcmCondutorOcorrencia + '\'' +
+                ", grupamentoCondutorOcorrencia='" + grupamentoCondutorOcorrencia + '\'' +
+                ", nomeGcmApoioOcorrencia='" + nomeGcmApoioOcorrencia + '\'' +
+                ", grupamentoApoio='" + grupamentoApoio + '\'' +
+                ", dataHoraCadastro='" + dataHoraCadastro + '\'' +
+                ", idUsuarioRegistrou='" + idUsuarioRegistrou + '\'' +
+                '}';
     }
 }

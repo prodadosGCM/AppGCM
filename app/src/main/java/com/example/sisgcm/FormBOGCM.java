@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.Bidi;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,6 +56,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class FormBOGCM extends AppCompatActivity {
 
+    private ProgressBar progressBarBOGCM;
     private Button btn_ComOcorrencia; //botão salvar
 
     String usuarioId;
@@ -92,6 +95,9 @@ public class FormBOGCM extends AppCompatActivity {
         setContentView(R.layout.activity_form_bogcm);
         getSupportActionBar().hide(); //esconder a barra da tela com o nome do programa
 
+        progressBarBOGCM=findViewById(R.id.progressbarBOGCM);
+
+
         db = FirebaseFirestore.getInstance();
 
         //inicializar os edittext
@@ -111,13 +117,33 @@ public class FormBOGCM extends AppCompatActivity {
         editTextNomeGCMCondutorOcorrencia=findViewById(R.id.edit_nomeGCM);
         editTextNomeGCMApoioOcorrencia=findViewById(R.id.edit_nomeGCM_EquipeAPoio);
 
+
+
+
+
         btn_ComOcorrencia=findViewById(R.id.btn_ComOcorrencia);
         btn_ComOcorrencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-            salvarDadosBOGCM();
+                // Desabilitar o botão durante o processo
+                progressBarBOGCM.setVisibility(View.VISIBLE);
+                btn_ComOcorrencia.setVisibility(View.INVISIBLE);
 
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (validarCampos()) {
+                            salvarDadosBOGCM();
+                            limparCampos();
+                        } else {
+                            // Se os campos não forem preenchidos, sinalize-os com asterisco
+                            sinalizarCamposObrigatorios();
+                            progressBarBOGCM.setVisibility(View.INVISIBLE);
+                            btn_ComOcorrencia.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }, 3000); // 3000 milissegundos (3 segundos) de atraso
             }
         });
 
@@ -318,57 +344,6 @@ public class FormBOGCM extends AppCompatActivity {
             }
         }); //final da spinner bairro
 
-        //inicio da spinner qualificacao 1
-        Spinner spinnerQualificacao1 = findViewById(R.id.spinner_qualificacao_q1);
-        ArrayAdapter<CharSequence> adapterQualificacaoQ1 = ArrayAdapter.createFromResource(
-                this,
-                R.array.itens_spinner_qualificacao_q1,
-                android.R.layout.simple_spinner_item
-        );
-        adapterQualificacaoQ1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerQualificacao1.setAdapter(adapterQualificacaoQ1);
-        spinnerQualificacao1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
-                String selectedItem = parentView.getItemAtPosition(position).toString();
-                // Toast.makeText(getApplicationContext(), "Selecionado: " + selectedItem, Toast.LENGTH_SHORT).show(); //código para exibir item selecionado
-// Defina a cor do item selecionado para preto
-                if (selectedItemView != null && selectedItemView instanceof TextView) {
-                    ((TextView) selectedItemView).setTextColor(Color.BLACK);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // Ação a ser executada quando nada é selecionado
-            }
-        }); //final da spinner qualificacao 1
-
-        //inicio da spinner qualificacao 2
-        Spinner spinnerQualificacao2 = findViewById(R.id.spinner_qualificacao_q2);
-        ArrayAdapter<CharSequence> adapterQualificacaoQ2 = ArrayAdapter.createFromResource(
-                this,
-                R.array.itens_spinner_qualificacao_q2,
-                android.R.layout.simple_spinner_item
-        );
-        adapterQualificacaoQ2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerQualificacao2.setAdapter(adapterQualificacaoQ2);
-        spinnerQualificacao2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
-                String selectedItem = parentView.getItemAtPosition(position).toString();
-                // Toast.makeText(getApplicationContext(), "Selecionado: " + selectedItem, Toast.LENGTH_SHORT).show(); //código para exibir item selecionado
-// Defina a cor do item selecionado para preto
-                if (selectedItemView != null && selectedItemView instanceof TextView) {
-                    ((TextView) selectedItemView).setTextColor(Color.BLACK);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // Ação a ser executada quando nada é selecionado
-            }
-        }); //final da spinner qualificacao 2
 
         //inicio da spinner grupamento
         Spinner spinnerGrupamento = findViewById(R.id.spinner_grupamento);
@@ -495,6 +470,18 @@ public class FormBOGCM extends AppCompatActivity {
 
     private void salvarDadosBOGCM(){
 
+        usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Obtenha a data e hora atual
+        Date dataHoraAtualRegistro = new Date();
+
+// Crie um formato de data e hora desejado
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+// Converta a data e hora atual em uma string no formato desejado
+        String dataHoraRegistroFormatada = formato.format(dataHoraAtualRegistro);
+
+
         Long id;
         id = System.currentTimeMillis();//id automatica falta colocar para consultar o banco e não repetir
         String idString = Long.toString(id);// transforma em string para nomear o documento com a mesma numeração da id
@@ -533,11 +520,6 @@ public class FormBOGCM extends AppCompatActivity {
         Spinner spinnerGrupamento = findViewById(R.id.spinner_grupamento);
         String grupamentoSelecionado = spinnerGrupamento.getSelectedItem().toString();
 
-        Spinner spinnerQualificacao1 = findViewById(R.id.spinner_qualificacao_q1);
-        String qualificacao1Selecionado = spinnerQualificacao1.getSelectedItem().toString();
-
-        Spinner spinnerQualificacao2 = findViewById(R.id.spinner_qualificacao_q2);
-        String qualificacao2Selecionado = spinnerQualificacao2.getSelectedItem().toString();
 
         Spinner spinnerOutroOrgao = findViewById(R.id.spinner_encaminhamento_orgao);
         String outroOrgaoSelecionado = spinnerOutroOrgao.getSelectedItem().toString();
@@ -548,51 +530,59 @@ public class FormBOGCM extends AppCompatActivity {
 
         // Crie um objeto para armazenar esses dados
         Map<String, Object> dataToSave = new HashMap<>();
-        dataToSave.put("id", id);
+        dataToSave.put("idBOGCM", idString);
 
         //salvar edittext
         dataToSave.put("data", dataBogcm);
         dataToSave.put("horaInicio", horaInicio);
         dataToSave.put("horaFinal", horaFinal);
-        dataToSave.put("TipoOcorrencia", tipoOcorrencia);
 
-        dataToSave.put("horaChegadaOutroOrgao", horaChegadaOutroOrgao);
-        dataToSave.put("horaSaidaOutroOrgao", horaSaidaOutroOrgao);
+
+        dataToSave.put("comoFoisolicitado", comoFoiSolicitadoSelecionado);
+
+
+
         dataToSave.put("endereco", endereco);
         dataToSave.put("nrEndereco", nrEndereco);
         dataToSave.put("complementoendereco", complementoEnd);
         dataToSave.put("pontoReferencia", pontoReferencia);
-        dataToSave.put("RelatoObsevacao", relatoObservacao);
-        dataToSave.put("materialRecolhidoApreendido", materialRecApreendido);
-        dataToSave.put("nomeQ1", nomeQ1);
-        dataToSave.put("nomeQ2", nomeq2);
-        dataToSave.put("cpfQ1", cpfQ1);
-        dataToSave.put("cpfQ2", cpfQ2);
-        dataToSave.put("telefoneQ1", telefoneQ1);
-        dataToSave.put("TelefoneQ2", telefoneq2);
-        dataToSave.put("nrRegistroOutroOrgao", nrRegistroOutroOrgao);
-        dataToSave.put("nomeGcmCondutorOcorrencia", nomeGCMCondutorOcorrencia);
-        dataToSave.put("nomeGcmApoioOcorrencia", nomeGCMApoioOcorrencia);
+        dataToSave.put("bairro", bairroSelecionado);        // salvar spinner
 
-        // salvar spinner
-        dataToSave.put("Bairro", bairroSelecionado);
-        dataToSave.put("comoFoisolicitado", comoFoiSolicitadoSelecionado);
-        dataToSave.put("GrupamentoCondutorOcorrencia", grupamentoSelecionado);
-        dataToSave.put("qualificacaoQ1",qualificacao1Selecionado);
-        dataToSave.put("qualificacaoQ2", qualificacao2Selecionado);
-        dataToSave.put("encaminhamentoOutroOrgao", outroOrgaoSelecionado);
+
+        dataToSave.put("tipoOcorrencia", tipoOcorrencia);
+        dataToSave.put("relatoObsevacao", relatoObservacao);
+        dataToSave.put("materialRecolhidoApreendido", materialRecApreendido);
+
+        dataToSave.put("cpfQ1", cpfQ1);
+        dataToSave.put("nomeQ1", nomeQ1);
+        dataToSave.put("telefoneQ1", telefoneQ1);
+
+        dataToSave.put("cpfQ2", cpfQ2);
+        dataToSave.put("nomeQ2", nomeq2);
+        dataToSave.put("telefoneQ2", telefoneq2);
+
+        dataToSave.put("encaminhamentoOutroOrgao", outroOrgaoSelecionado);        // salvar spinner
+        dataToSave.put("horaChegadaOutroOrgao", horaChegadaOutroOrgao);
+        dataToSave.put("horaSaidaOutroOrgao", horaSaidaOutroOrgao);
+        dataToSave.put("nrRegistroOutroOrgao", nrRegistroOutroOrgao);
+
+        dataToSave.put("nomeGcmCondutorOcorrencia", nomeGCMCondutorOcorrencia);
+        dataToSave.put("grupamentoCondutorOcorrencia", grupamentoSelecionado);        // salvar spinner
+
+
+        dataToSave.put("nomeGcmApoioOcorrencia", nomeGCMApoioOcorrencia);
         dataToSave.put("grupamentoApoio", grupamentoApoioSelecionado);
 
 
 
         //salvar data e hora cadastro
-        dataToSave.put("dataHoraCadastro", FieldValue.serverTimestamp());
+        dataToSave.put("dataHoraCadastro", dataHoraRegistroFormatada);
 
+        dataToSave.put("idUsuarioRegistrou", usuarioId);
 
 
         System.currentTimeMillis();
 
-        usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         // ...
 
         DocumentReference documentReference = db.collection("DB_BOGCM").document(idString); // .document(idString) coloca o nr da id no documento
@@ -600,7 +590,11 @@ public class FormBOGCM extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+
                         Toast.makeText(getApplicationContext(), "Dados salvos com sucesso", Toast.LENGTH_SHORT).show();
+                        progressBarBOGCM.setVisibility(View.INVISIBLE);
+                        // habilita o botão depois do processo
+                        btn_ComOcorrencia.setVisibility(View.VISIBLE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -608,6 +602,9 @@ public class FormBOGCM extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getApplicationContext(), "Erro ao salvar dados", Toast.LENGTH_SHORT).show();
                         Log.e(TAG, "Erro ao salvar dados: " + e.getMessage());
+                        progressBarBOGCM.setVisibility(View.INVISIBLE);
+                        // habilita o botão depois do processo
+                        btn_ComOcorrencia.setVisibility(View.VISIBLE);
                     }
                 });
     }// final da funçAo salvar
@@ -631,6 +628,62 @@ public class FormBOGCM extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+
+    // Função para validar os campos
+    private boolean validarCampos() {
+        String dataBogcm = eText.getText().toString();
+        String horaInicio = editTextTime.getText().toString();
+        String horaFinal = editTextTimehorafinal.getText().toString();
+
+        return !dataBogcm.isEmpty() && !horaInicio.isEmpty() && !horaFinal.isEmpty();
+    }
+
+    // Função para sinalizar os campos obrigatórios
+    private void sinalizarCamposObrigatorios() {
+        if (eText.getText().toString().isEmpty()) {
+            eText.setError("Campo obrigatório *");
+        }
+        if (editTextTime.getText().toString().isEmpty()) {
+            editTextTime.setError("Campo obrigatório *");
+        }
+        if (editTextTimehorafinal.getText().toString().isEmpty()) {
+            editTextTimehorafinal.setError("Campo obrigatório *");
+        }
+    }
+
+    private void limparCampos() {
+        eText.setText("");
+        editTextTime.setText("");
+        editTextTimehorafinal.setText("");
+        editTextEndereco.setText("");
+        editTextNrdoEndereco.setText("");
+        editTextComplementoEndereco.setText("");
+        editTextPontoReferencia.setText("");
+        editTextRelatoObservacao.setText("");
+        editTextMaterialRecolApreendido.setText("");
+        editTextNomeQ1.setText("");
+        editTextNomeQ2.setText("");
+        editTextCpfQ1.setText("");
+        editTextCpfq2.setText("");
+        editTextTelefoneQ1.setText("");
+        editTextTelefoneQ2.setText("");
+        editTextNrRegistroOutroOrgao.setText("");
+        editTextNomeGCMCondutorOcorrencia.setText("");
+        editTextNomeGCMApoioOcorrencia.setText("");
+        autoCompleteTextView.setText(""); // Limpando o AutoCompleteTextView
+        // Limpando as spinners
+        Spinner spinnerComo = findViewById(R.id.spinnercomo);
+        spinnerComo.setSelection(0); // Seleciona o primeiro item (ou outro item padrão)
+        Spinner spinnerBairro = findViewById(R.id.spinnerBairro);
+        spinnerBairro.setSelection(0);
+        Spinner spinnerGrupamento = findViewById(R.id.spinner_grupamento);
+        spinnerGrupamento.setSelection(0);
+        Spinner spinnerOutroOrgao = findViewById(R.id.spinner_encaminhamento_orgao);
+        spinnerOutroOrgao.setSelection(0);
+        Spinner spinnerGrupamentoApoio = findViewById(R.id.spinner_grupamentoEquipeApoio);
+        spinnerGrupamentoApoio.setSelection(0);
     }
 
 

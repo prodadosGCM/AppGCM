@@ -69,9 +69,8 @@
     </style>
 
     <style name="ButtonTelaPrincipal">
-        <item name="android:layout_width">150dp</item>
-
-        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">140dp</item>
         <item name="android:layout_marginLeft">40dp</item>
         <item name="android:layout_marginRight">40dp</item>
         <item name="android:layout_marginTop">15dp</item>
@@ -81,6 +80,20 @@
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/btn_princial</item>
     </style>
+
+    <style name="ButtonTelaAssinatura">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/button</item>
+    </style>
+
 
     <style name="ContainerComponentsBOGCM">
         <item name="android:layout_width">match_parent</item>

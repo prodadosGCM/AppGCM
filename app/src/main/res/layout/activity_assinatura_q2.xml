@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TelaExtra">
+    tools:context=".AssinaturaQ2">
 
     <com.github.gcacace.signaturepad.views.SignaturePad
         android:id="@+id/signaturePad"
@@ -15,7 +15,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_limpar"
         style="@style/ButtonTelaAssinatura"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:text="@string/btn_limpar_assinatura"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
@@ -25,7 +25,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_salvar"
         style="@style/ButtonTelaAssinatura"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="salvar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"

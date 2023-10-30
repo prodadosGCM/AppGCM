@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.github.gcacace.signaturepad.views.SignaturePad;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -20,23 +20,17 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class TelaExtra extends AppCompatActivity {
+public class AssinaturaQ1 extends AppCompatActivity {
 
     private SignaturePad signaturePad;
     private Button btn_limpar, btn_salvar; //botão salvar
     private FirebaseFirestore db;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_extra);
+        setContentView(R.layout.activity_assinatura_q1);
         getSupportActionBar().hide(); //esconder a barra da tela com o nome do programa
-
-
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-
 
         btn_limpar=findViewById(R.id.btn_limpar);
 
@@ -48,8 +42,6 @@ public class TelaExtra extends AppCompatActivity {
 
             }
         });
-
-
         btn_salvar=findViewById(R.id.btn_salvar);
 
         btn_salvar.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +57,8 @@ public class TelaExtra extends AppCompatActivity {
         signaturePad = findViewById(R.id.signaturePad);
 
         // Configurar a espessura da caneta (opcional)
-        signaturePad.setMinWidth(5);
-        signaturePad.setMaxWidth(10);
+        signaturePad.setMinWidth(3);
+        signaturePad.setMaxWidth(3);
 
         // Configurar a cor da caneta (opcional)
         signaturePad.setPenColor(Color.BLACK);
@@ -130,15 +122,18 @@ public class TelaExtra extends AppCompatActivity {
                     Toast.makeText(this, "Erro ao fazer upload da imagem: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
         // Agora você pode salvar ou fazer o que quiser com a assinatura
-    }
+
+
+
+    }//final oncreate
+
 
     @Override
     public void onBackPressed() {
 
         // Ou, para retornar à tela anterior (activity anterior), você pode usar o Intent:
-        Intent intent = new Intent(this, TelaPrincipal.class); // Substitua TelaAnterior pela classe da sua atividade anterior
+        Intent intent = new Intent(this, FormBOGCM.class); // Substitua TelaAnterior pela classe da sua atividade anterior
         startActivity(intent);
         finish(); // Finaliza a atividade atual
     }
 }
-

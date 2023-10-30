@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="8dp"
+    >
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginVertical="6dp"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Id BOGCM:"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:background="@color/white"
+
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewidBOGCM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        android:background="@color/white"
+
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data:"
+        android:background="@color/white"
+
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+        <TextView
+        android:id="@+id/textViewData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+        android:textSize="16dp"  />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora inicial:"
+        android:background="@color/white"
+
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+        <TextView
+        android:id="@+id/textViewhoraInicial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+        android:textSize="16dp"  />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora final:"
+        android:background="@color/white"
+
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+        <TextView
+        android:id="@+id/textViewHoraFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+            android:background="@color/white"
+
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="16dp"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Como foi solicitado:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewComoFoiSolicitado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Endereço:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewEndereco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nr:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewNrEndereco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complemento:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewComplemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ponto referência:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewPontoReferencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bairro:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewBairro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo ocorrência:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewTipoOcorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relato/Observação:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewRelatoObservacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Material recolhido/apreendido:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewMaterialRecolhidoApreendido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPF Q1:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewCpfQ1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome Q1:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewNomeQ1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefone Q1:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewTelefoneQ1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPF Q2:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewCpfQ2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome Q2:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewNomeQ2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefone Q2:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewTelefoneQ2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Orgão encaminhado:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewOrgaoEncaminhado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora chegada:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewHoraChegadaOrgaoEncam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora saída:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewHoraSaidaOrgaoEncam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nr registro orgão:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewNrRegOrgaoEncam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome GCM condutor da ocorrência:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewNomeGCMCondutorOcorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grupamento:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewGrupamentoCondutorOcorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+
+        >
+
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome GCM apoio:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewNomeGcmApoio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grupamento:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewGrupamentoGcmApoio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data/hora que salvou:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewDataHoraSalvou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id usuário:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:background="@color/white"
+
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textViewIdUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:background="@color/white"
+
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>
+
+</androidx.cardview.widget.CardView>

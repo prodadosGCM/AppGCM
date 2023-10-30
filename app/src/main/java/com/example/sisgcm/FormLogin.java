@@ -51,6 +51,8 @@ public class FormLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+
                 String matricula = edit_matricula.getText().toString();
                 String senha = edit_Senha.getText().toString();
 
@@ -59,7 +61,14 @@ public class FormLogin extends AppCompatActivity {
                     snackbar.setBackgroundTint(Color.WHITE);
                     snackbar.setTextColor(Color.BLACK);
                     snackbar.show();
+
                 } else {
+                    // Exibir a ProgressBar
+                    progressBar.setVisibility(View.VISIBLE);
+
+                    // Desabilitar o botão durante o processo de autenticação
+                    btn_entrar.setEnabled(false);
+
                     AutenticarUsuario(v);
 
 
@@ -92,9 +101,14 @@ public class FormLogin extends AppCompatActivity {
     private void AutenticarUsuario (View v){
         String matricula = edit_matricula.getText().toString();
         String senha = edit_Senha.getText().toString();
+
+
+
         FirebaseAuth.getInstance().signInWithEmailAndPassword(matricula,senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
+
                 if (task.isSuccessful()){
                     progressBar.setVisibility(View.VISIBLE);
 

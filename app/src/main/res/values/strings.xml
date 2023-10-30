@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SisGCM</string>
+    <string name="app_name">App\nGCMCF</string>
 
     <string name="entrar">ENTRAR</string>
     <string name="text_TelaLogin">© 2023</string>
@@ -7,8 +7,8 @@
     <string name="btn_principalPesquisa">PESQUISAR</string>
     <string name="btn_PrincipalDinamica">DINÂMICA</string>
     <string name="btn_PrincipalExtra">EXTRA</string>
-    <string name="btn_PrincipalID_Funcional">ID. FUNCIONAL</string>
-    <string name="btn_PrincipalDeslogar">DESLOGAR</string>
+    <string name="btn_PrincipalID_Funcional">FUNCIONAL\nDIGITAL</string>
+    <string name="btn_PrincipalDeslogar">SAIR</string>
 
 
     <string name="text_BOGCMComOcorrencia">Comunicado da ocorrência</string>
@@ -26,8 +26,12 @@
     <string name="text_BOGCMfinalizacaoOcorrencia">Finalização da ocorrência</string>
 
 
-    <string name="btn_avancaComOcorrencia">AVANÇAR</string>
+    <string name="btn_avancaComOcorrencia">ENVIAR</string>
     <string name="btn_enviar_dinamica">ENVIAR</string>
+    <string name="btn_limpar_assinatura">LIMPAR</string>
+    <string name="btn_salvar_assinatura">SALVAR</string>
+    <string name="btn_recolherAssinatturaQ1">ASSINATURA Q1</string>
+    <string name="btn_recolherAssinatturaQ2">ASSINATURA Q2</string>
 
 
     <string-array name="itens_spinner">
