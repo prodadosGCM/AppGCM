@@ -2,21 +2,24 @@ package com.example.sisgcm;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.nfc.Tag;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Spinner;
 import android.widget.*;
 import android.text.InputType;
@@ -25,9 +28,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.Bidi;
+import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,18 +41,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 
 import android.widget.TimePicker;
+import android.content.SharedPreferences;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Timestamp;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -59,6 +61,8 @@ public class FormBOGCM extends AppCompatActivity {
     private ProgressBar progressBarBOGCM;
     private Button btn_ComOcorrencia; //botão salvar
 
+    String idString;
+    private String imageUrl;  // Adicione esta variável global
     String usuarioId;
     private FirebaseFirestore db;
 
@@ -88,6 +92,12 @@ public class FormBOGCM extends AppCompatActivity {
     "M-MAUS TRATOS A ANIMAIS","V-VIOLÊNCIA DOMÉSTICA (LEI MARIA DA PENHA)", "OUTROS (ESPECIFICAR NA OBSERVAÇÃO)"};
 
 
+    private SharedPreferences sharedPreferences;
+    private Uri mSelectedUri;
+    private ImageView mImgPhoto;
+
+    private String urlImagem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,30 +105,444 @@ public class FormBOGCM extends AppCompatActivity {
         setContentView(R.layout.activity_form_bogcm);
         getSupportActionBar().hide(); //esconder a barra da tela com o nome do programa
 
+        mImgPhoto=findViewById(R.id.imagem_foto_1);
+
+
+
+
+        FloatingActionButton fab = findViewById(R.id.botao_flutuante_add_foto);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Cria um objeto PopupMenu, passando o contexto e a view ancorada
+                PopupMenu popupMenu = new PopupMenu(FormBOGCM.this, view);
+
+                // Infla o menu a partir do arquivo XML
+                popupMenu.getMenuInflater().inflate(R.menu.add_foto, popupMenu.getMenu());
+
+                // Define um ouvinte de clique para lidar com eventos de item de menu
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        // Lidar com o clique do item de menu aqui
+                        switch (menuItem.getItemId()) {
+                            case R.id.obter_foto_dispositivo:
+                                obterImagemGaleria();
+
+                            return true;
+                            case R.id.tirar_foto:
+                                // Código para a Opção 2
+                                Toast.makeText(getApplicationContext(), "tirar fotos", Toast.LENGTH_SHORT).show();
+
+                                return true;
+                            // Adicione mais casos conforme necessário
+                            default:
+                                return false;
+                        }
+                    }
+                });
+
+                // Exibe o menu popup
+                popupMenu.show();
+            }
+        });
+
+
+
         progressBarBOGCM=findViewById(R.id.progressbarBOGCM);
 
 
         db = FirebaseFirestore.getInstance();
 
         //inicializar os edittext
-        editTextEndereco=findViewById(R.id.edit_endereco);
-        editTextNrdoEndereco=findViewById(R.id.edit_nr_endereco);
-        editTextComplementoEndereco=findViewById(R.id.edit_complemento);
-        editTextPontoReferencia=findViewById(R.id.edit_PontoReferencia);
-        editTextRelatoObservacao=findViewById(R.id.edit_observacao);
-        editTextMaterialRecolApreendido=findViewById(R.id.edit_MaterialApreendido);
-        editTextNomeQ1=findViewById(R.id.edit_nome_Q1);
-        editTextNomeQ2=findViewById(R.id.edit_nome_Q2);
-        editTextCpfQ1=findViewById(R.id.edit_CPF_Q1);
-        editTextCpfq2=findViewById(R.id.edit_CPF_Q2);
-        editTextTelefoneQ1=findViewById(R.id.edit_telefone_Q1);
-        editTextTelefoneQ2=findViewById(R.id.edit_telefone_Q2);
-        editTextNrRegistroOutroOrgao=findViewById(R.id.edit_nr_registro_EncaminhamentoOrgao);
-        editTextNomeGCMCondutorOcorrencia=findViewById(R.id.edit_nomeGCM);
-        editTextNomeGCMApoioOcorrencia=findViewById(R.id.edit_nomeGCM_EquipeAPoio);
+
+
+// inicio persistencia de dados edittext
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+
+        // inicio persistencia de dados endereco
+
+        editTextEndereco = findViewById(R.id.edit_endereco);
+
+// Recuperar o valor salvo, se existir
+        String endereco = sharedPreferences.getString("endereco", "");
+        editTextEndereco.setText(endereco);
+
+        editTextEndereco.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("endereco", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados endereco
+
+        // inicio persistencia de dados nr endereco
+        editTextNrdoEndereco = findViewById(R.id.edit_nr_endereco);
+
+// Recuperar o valor salvo, se existir
+        String nr_endereco = sharedPreferences.getString("nr_endereco", "");
+        editTextNrdoEndereco.setText(nr_endereco);
+
+        editTextNrdoEndereco.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("nr_endereco", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados nr endereco
+
+
+// inicio persistencia de dados complemento
+        editTextComplementoEndereco = findViewById(R.id.edit_complemento);
+
+// Recuperar o valor salvo, se existir
+        String complemento = sharedPreferences.getString("complemento", "");
+        editTextComplementoEndereco.setText(complemento);
+
+        editTextComplementoEndereco.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("complemento", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados complemento
+
+        // inicio persistencia de dados ponto_referencia
+
+        editTextPontoReferencia = findViewById(R.id.edit_PontoReferencia);
+
+// Recuperar o valor salvo, se existir
+        String ponto_referencia = sharedPreferences.getString("ponto_referencia", "");
+        editTextPontoReferencia.setText(ponto_referencia);
+
+        editTextPontoReferencia.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("ponto_referencia", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados ponto_referencia
+
+        // inicio persistencia de dados relato/observacao
+
+        editTextRelatoObservacao = findViewById(R.id.edit_observacao);
+
+// Recuperar o valor salvo, se existir
+        String relato_observacao = sharedPreferences.getString("relato_observacao", "");
+        editTextRelatoObservacao.setText(relato_observacao);
+
+        editTextRelatoObservacao.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("relato_observacao", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados relato_observacao
+
+// inicio persistencia de dados material_apreendido
+
+        editTextMaterialRecolApreendido = findViewById(R.id.edit_MaterialApreendido);
+
+// Recuperar o valor salvo, se existir
+        String material_apreendido = sharedPreferences.getString("material_apreendido", "");
+        editTextMaterialRecolApreendido.setText(material_apreendido);
+
+        editTextMaterialRecolApreendido.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("material_apreendido", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados material_apreendido
+
+        // inicio persistencia de dados nome q1
+
+        editTextNomeQ1 = findViewById(R.id.edit_nome_Q1);
+
+// Recuperar o valor salvo, se existir
+        String nomeq1 = sharedPreferences.getString("nomeq1", "");
+        editTextNomeQ1.setText(nomeq1);
+
+        editTextNomeQ1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("nomeq1", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados nome q1
+
+
+// inicio persistencia de dados cpf q1
+
+        editTextCpfQ1 = findViewById(R.id.edit_CPF_Q1);
+
+// Recuperar o valor salvo, se existir
+        String cpfq1 = sharedPreferences.getString("cpfq1", "");
+        editTextCpfQ1.setText(cpfq1);
+
+        editTextCpfQ1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("cpfq1", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados cpfq1 q1
+
+
+        // inicio persistencia de dados telefone q1
+
+        editTextTelefoneQ1 = findViewById(R.id.edit_telefone_Q1);
+
+// Recuperar o valor salvo, se existir
+        String telefoneq1 = sharedPreferences.getString("telefoneq1", "");
+        editTextTelefoneQ1.setText(telefoneq1);
+
+        editTextTelefoneQ1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("telefoneq1", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados telefone q1
+
+        // inicio persistencia de dados nome q2
+
+        editTextNomeQ2 = findViewById(R.id.edit_nome_Q2);
+
+// Recuperar o valor salvo, se existir
+        String nomeq2 = sharedPreferences.getString("nomeq2", "");
+        editTextNomeQ2.setText(nomeq2);
+
+        editTextNomeQ2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("nomeq2", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados nomeq2
+
+        // inicio persistencia de dados cpf q2
+
+        editTextCpfq2 = findViewById(R.id.edit_CPF_Q2);
+
+// Recuperar o valor salvo, se existir
+        String cpfq2 = sharedPreferences.getString("cpfq2", "");
+        editTextCpfq2.setText(cpfq2);
+
+        editTextCpfq2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("cpfq2", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados cpfq2
+
+
+        // inicio persistencia de dados telefone q2
+
+        editTextTelefoneQ2 = findViewById(R.id.edit_telefone_Q2);
+
+// Recuperar o valor salvo, se existir
+        String telefoneq2 = sharedPreferences.getString("telefoneq2", "");
+        editTextTelefoneQ2.setText(telefoneq2);
+
+        editTextTelefoneQ2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("telefoneq2", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados telefoneq2
+
+        // inicio persistencia de dados nr_registroOutroorgao
+
+        editTextNrRegistroOutroOrgao = findViewById(R.id.edit_nr_registro_EncaminhamentoOrgao);
+
+// Recuperar o valor salvo, se existir
+        String nr_registroOutroorgao = sharedPreferences.getString("nr_registroOutroorgao", "");
+        editTextNrRegistroOutroOrgao.setText(nr_registroOutroorgao);
+
+        editTextNrRegistroOutroOrgao.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("nr_registroOutroorgao", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados nr_registroOutroorgao
+
+        // inicio persistencia de dados nome_gcmcondutor
+
+        editTextNomeGCMCondutorOcorrencia = findViewById(R.id.edit_nomeGCM);
+
+// Recuperar o valor salvo, se existir
+        String nome_gcmcondutor = sharedPreferences.getString("nome_gcmcondutor", "");
+        editTextNomeGCMCondutorOcorrencia.setText(nome_gcmcondutor);
+
+        editTextNomeGCMCondutorOcorrencia.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("nome_gcmcondutor", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados nome_gcmcondutor
+
+        // inicio persistencia de dados nome_gcmapoio
+
+        editTextNomeGCMApoioOcorrencia = findViewById(R.id.edit_nomeGCM_EquipeAPoio);
+
+// Recuperar o valor salvo, se existir
+        String nome_gcmapoio = sharedPreferences.getString("nome_gcmapoio", "");
+        editTextNomeGCMApoioOcorrencia.setText(nome_gcmapoio);
+
+        editTextNomeGCMApoioOcorrencia.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Salvar o valor digitado nas SharedPreferences
+                sharedPreferences.edit().putString("nome_gcmapoio", charSequence.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        // fim persistencia de dados nome_gcmapoio
 
 
 
+
+
+        //fim da persistencia de dados edittext
 
 
         btn_ComOcorrencia=findViewById(R.id.btn_ComOcorrencia);
@@ -134,9 +558,13 @@ public class FormBOGCM extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (validarCampos()) {
-                            salvarDadosBOGCM();
-                            limparCampos();
+
+                            exemploChamadaFuncoes(mSelectedUri);
+                            //chamar todas funcoes
+
                         } else {
+                            Toast.makeText(getApplicationContext(), "Preencha os campos obrigatórios!", Toast.LENGTH_SHORT).show();
+
                             // Se os campos não forem preenchidos, sinalize-os com asterisco
                             sinalizarCamposObrigatorios();
                             progressBarBOGCM.setVisibility(View.INVISIBLE);
@@ -154,6 +582,14 @@ public class FormBOGCM extends AppCompatActivity {
         eText=(EditText) findViewById(R.id.edit_data);
         eText.setInputType(InputType.TYPE_NULL);
 
+        // Recuperar a data selecionada, se existir
+        String selectedDate = sharedPreferences.getString("selectedDate", "");
+
+        if (!selectedDate.isEmpty()) {
+            eText.setText(selectedDate);
+        }
+
+
         eText.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -170,6 +606,8 @@ public class FormBOGCM extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 String selectedDate = String.format(Locale.getDefault(), "%02d/%02d/%d", dayOfMonth, (monthOfYear + 1), year);
                                 eText.setText(selectedDate);
+                                // Salvar a data selecionada nas SharedPreferences
+                                sharedPreferences.edit().putString("selectedDate", selectedDate).apply();
                             }
                         }, year, month, day);
                 picker.show();
@@ -181,6 +619,12 @@ public class FormBOGCM extends AppCompatActivity {
 // inicio do relogio hora inicial
         editTextTime=(EditText) findViewById(R.id.edit_hora_inicio);
         editTextTime.setInputType(InputType.TYPE_NULL);
+        // Recuperar o valor salvo, se existir
+        String horaInicio = sharedPreferences.getString("hora_inicio", "");
+
+        if (!horaInicio.isEmpty()) {
+            editTextTime.setText(horaInicio);
+        }
         editTextTime.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -195,6 +639,9 @@ public class FormBOGCM extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
                                 editTextTime.setText(selectedTime);
+                                // Salvar o horário inicial nas SharedPreferences
+                                sharedPreferences.edit().putString("hora_inicio", selectedTime).apply();
+
                             }
                         },
                         hour,
@@ -209,6 +656,13 @@ public class FormBOGCM extends AppCompatActivity {
 // inicio do relogio hora final
         editTextTimehorafinal=(EditText) findViewById(R.id.edit_hora_final);
         editTextTimehorafinal.setInputType(InputType.TYPE_NULL);
+// Recuperar o valor salvo, se existir
+        String horaFinal = sharedPreferences.getString("hora_final", "");
+
+        if (!horaFinal.isEmpty()) {
+            editTextTimehorafinal.setText(horaFinal);
+        }
+
         editTextTimehorafinal.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -223,6 +677,9 @@ public class FormBOGCM extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
                                 editTextTimehorafinal.setText(selectedTime);
+// Salvar o horário final nas SharedPreferences
+                                sharedPreferences.edit().putString("hora_final", selectedTime).apply();
+
                             }
                         },
                         hour,
@@ -237,6 +694,13 @@ public class FormBOGCM extends AppCompatActivity {
         // inicio do relogio hora chegada outro orgao
         editTextHoraChegadaOutroOrgao=(EditText) findViewById(R.id.edit_hora_chegada_encaminhamentoorgao);
         editTextHoraChegadaOutroOrgao.setInputType(InputType.TYPE_NULL);
+// Recuperar o valor salvo, se existir
+        String horaChegadaOutroOrgao = sharedPreferences.getString("hora_chegada_outro_orgao", "");
+
+        if (!horaChegadaOutroOrgao.isEmpty()) {
+            editTextHoraChegadaOutroOrgao.setText(horaChegadaOutroOrgao);
+        }
+
         editTextHoraChegadaOutroOrgao.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -251,6 +715,9 @@ public class FormBOGCM extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
                                 editTextHoraChegadaOutroOrgao.setText(selectedTime);
+                                // Salvar a hora de chegada em outro órgão nas SharedPreferences
+                                sharedPreferences.edit().putString("hora_chegada_outro_orgao", selectedTime).apply();
+
                             }
                         },
                         hour,
@@ -266,6 +733,13 @@ public class FormBOGCM extends AppCompatActivity {
         // inicio do relogio hora saida outro orgao
         editTextHoraSaidaOutroOrgao=(EditText) findViewById(R.id.edit_hora_saida_encaminhamentoorgao);
         editTextHoraSaidaOutroOrgao.setInputType(InputType.TYPE_NULL);
+
+        // Recuperar o valor salvo, se existir
+        String horaSaidaOutroOrgao = sharedPreferences.getString("hora_saida_outro_orgao", "");
+
+        if (!horaSaidaOutroOrgao.isEmpty()) {
+            editTextHoraSaidaOutroOrgao.setText(horaSaidaOutroOrgao);
+        }
         editTextHoraSaidaOutroOrgao.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -280,6 +754,9 @@ public class FormBOGCM extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
                                 editTextHoraSaidaOutroOrgao.setText(selectedTime);
+                                // Salvar a hora de saída em outro órgão nas SharedPreferences
+                                sharedPreferences.edit().putString("hora_saida_outro_orgao", selectedTime).apply();
+
                             }
                         },
                         hour,
@@ -293,6 +770,7 @@ public class FormBOGCM extends AppCompatActivity {
 
 //inicio da spinner como foi solicitado
         Spinner spinner = findViewById(R.id.spinnercomo);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.itens_spinner,
@@ -300,22 +778,40 @@ public class FormBOGCM extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+// Recuperar o valor selecionado, se existir
+        int selectedPosition = sharedPreferences.getInt("spinnerComoPosition", 0); // 0 é o valor padrão se não houver nada salvo
+
+        spinner.setSelection(selectedPosition);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
                 String selectedItem = parentView.getItemAtPosition(position).toString();
                 // Toast.makeText(getApplicationContext(), "Selecionado: " + selectedItem, Toast.LENGTH_SHORT).show(); //código para exibir item selecionado
-// Defina a cor do item selecionado para preto
+                // Defina a cor do item selecionado para preto
+
                 if (selectedItemView != null && selectedItemView instanceof TextView) {
                     ((TextView) selectedItemView).setTextColor(Color.BLACK);
+
+                    // Salvar a posição da seleção na SharedPreferences
+                    sharedPreferences.edit().putInt("spinnerComoPosition", position).apply();
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // Ação a ser executada quando nada é selecionado
             }
         }); //final da spinner como foi solicitado
+        //final da spinner como foi solicitado
+
+
+
+
+
+
+
 
 
         //inicio da spinner BAIRRO
@@ -327,6 +823,12 @@ public class FormBOGCM extends AppCompatActivity {
         );
         adapterBairro.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBairro.setAdapter(adapterBairro);
+
+        // Recuperar o valor selecionado, se existir
+        int selectedPositionBairro = sharedPreferences.getInt("spinnerBairroPosition", 0); // 0 é o valor padrão se não houver nada salvo
+
+        spinnerBairro.setSelection(selectedPositionBairro);
+
         spinnerBairro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -336,6 +838,9 @@ public class FormBOGCM extends AppCompatActivity {
 // Defina a cor do item selecionado para preto
                 if (selectedItemView != null && selectedItemView instanceof TextView) {
                     ((TextView) selectedItemView).setTextColor(Color.BLACK);
+                    // Salvar a posição da seleção na SharedPreferences
+                    sharedPreferences.edit().putInt("spinnerBairroPosition", position).apply();
+
                 }
             }
             @Override
@@ -354,6 +859,11 @@ public class FormBOGCM extends AppCompatActivity {
         );
         adapterGrupamento.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGrupamento.setAdapter(adapterGrupamento);
+
+        // Recuperar a posição salva, se existir
+        int selectedPositionGrupamento = sharedPreferences.getInt("spinnerGrupamentoPosition", 0); // 0 é o valor padrão se não houver nada salvo
+
+        spinnerGrupamento.setSelection(selectedPositionGrupamento);
         spinnerGrupamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -363,6 +873,9 @@ public class FormBOGCM extends AppCompatActivity {
 // Defina a cor do item selecionado para preto
                 if (selectedItemView != null && selectedItemView instanceof TextView) {
                     ((TextView) selectedItemView).setTextColor(Color.BLACK);
+                    // Salvar a posição da seleção na SharedPreferences
+                    sharedPreferences.edit().putInt("spinnerGrupamentoPosition", position).apply();
+
                 }
             }
             @Override
@@ -381,6 +894,12 @@ public class FormBOGCM extends AppCompatActivity {
         );
         adapterOutroOrgao.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOutroOrgao.setAdapter(adapterOutroOrgao);
+
+        // Recuperar a posição salva, se existir
+        int selectedPositionOutroOrgao = sharedPreferences.getInt("spinnerOutroOrgaoPosition", 0); // 0 é o valor padrão se não houver nada salvo
+
+        spinnerOutroOrgao.setSelection(selectedPositionOutroOrgao);
+
         spinnerOutroOrgao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -390,6 +909,9 @@ public class FormBOGCM extends AppCompatActivity {
 // Defina a cor do item selecionado para preto
                 if (selectedItemView != null && selectedItemView instanceof TextView) {
                     ((TextView) selectedItemView).setTextColor(Color.BLACK);
+                    // Salvar a posição da seleção na SharedPreferences
+                    sharedPreferences.edit().putInt("spinnerOutroOrgaoPosition", position).apply();
+
                 }
             }
             @Override
@@ -408,6 +930,11 @@ public class FormBOGCM extends AppCompatActivity {
         );
         adapterGrupamentoApoio.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGrupamentoApoio.setAdapter(adapterGrupamentoApoio);
+        // Recuperar a posição salva, se existir
+        int selectedPositionGrupamentoApoio = sharedPreferences.getInt("spinnerGrupamentoApoioPosition", 0); // 0 é o valor padrão se não houver nada salvo
+
+        spinnerGrupamentoApoio.setSelection(selectedPositionGrupamentoApoio);
+
         spinnerGrupamentoApoio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -417,6 +944,9 @@ public class FormBOGCM extends AppCompatActivity {
 // Defina a cor do item selecionado para preto
                 if (selectedItemView != null && selectedItemView instanceof TextView) {
                     ((TextView) selectedItemView).setTextColor(Color.BLACK);
+                    // Salvar a posição da seleção na SharedPreferences
+                    sharedPreferences.edit().putInt("spinnerGrupamentoApoioPosition", position).apply();
+
                 }
             }
             @Override
@@ -438,6 +968,11 @@ public class FormBOGCM extends AppCompatActivity {
         // Configure o AutoCompleteTextView com o ArrayAdapter
         autoCompleteTextView.setAdapter(autoCompleteAdapter);
 
+        // Recuperar o texto digitado anteriormente, se existir
+        String savedText = sharedPreferences.getString("autoCompleteText", "");
+        autoCompleteTextView.setText(savedText);
+
+
         // Adicione um TextWatcher para verificar se o texto digitado corresponde a uma sugestão
         autoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -448,8 +983,8 @@ public class FormBOGCM extends AppCompatActivity {
                 String textoDigitado = autoCompleteTextView.getText().toString();
                 if (!isSugestaoValida(textoDigitado)) {
                     autoCompleteTextView.setError("Selecione uma sugestão válida");
-                    Toast.makeText(getApplicationContext(), "Entrada inválida", Toast.LENGTH_SHORT).show();
-                    autoCompleteTextView.requestFocus(); // Mantenha o foco no campo de texto
+                    //Toast.makeText(getApplicationContext(), "Entrada inválida", Toast.LENGTH_SHORT).show();
+                    //autoCompleteTextView.requestFocus(); // Mantenha o foco no campo de texto
 
                 } else {
                     autoCompleteTextView.setError(null); // Limpa o erro
@@ -457,20 +992,77 @@ public class FormBOGCM extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                // Salvar o texto digitado nas SharedPreferences após cada alteração
+                sharedPreferences.edit().putString("autoCompleteText", editable.toString()).apply();
+
             }
         });
         //FINAL DO AUTO COMPLETE TIPO OCORRENCIA
 
-
-
-
     }//FINAL ON CREATE
+
+    private void obterImagemGaleria() {
+        Intent intent = new Intent (Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivity(intent);
+        startActivityForResult(Intent.createChooser(intent, "Escolha uma imagem"), 0);
+
+    }
+
+    @Override // necessario para o obterimagemgaleria
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0){
+            mSelectedUri = data.getData();
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
+                mImgPhoto.setImageDrawable(new BitmapDrawable(bitmap));
+            }catch (IOException e){
+
+            }
+            }
+
+    }
+
+    private void uploadImageToStorage(Uri imageUri, OnSuccessListener<String> urlSuccessListener) {
+        Long id;
+        id = System.currentTimeMillis();//id automatica falta colocar para consultar o banco e não repetir
+        idString = Long.toString(id);// transforma em string para nomear o documento com a mesma numeração da id
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("seu_caminho_no_storage/" + idString);
+
+        storageRef.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> {
+                    // Imagem enviada com sucesso
+                    storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        // Obtenha a URL da imagem
+                        imageUrl = uri.toString();
+                        // Agora, você pode salvar a URL no Firestore
+                        urlSuccessListener.onSuccess(imageUrl); // Chamando o listener com a URL
+
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    // Tratamento de erro ao enviar a imagem para o Storage
+                });
+    }
+
+
+
+
 
     //função salvar dados
 
     private void salvarDadosBOGCM(){
 
+
+
         usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
 
         // Obtenha a data e hora atual
         Date dataHoraAtualRegistro = new Date();
@@ -482,9 +1074,7 @@ public class FormBOGCM extends AppCompatActivity {
         String dataHoraRegistroFormatada = formato.format(dataHoraAtualRegistro);
 
 
-        Long id;
-        id = System.currentTimeMillis();//id automatica falta colocar para consultar o banco e não repetir
-        String idString = Long.toString(id);// transforma em string para nomear o documento com a mesma numeração da id
+        String idBOGCM = idString;// recebi o id do bogcm atraves da geraçao do uploadfoto1
 
         String dataBogcm = eText.getText().toString();
         String horaInicio = editTextTime.getText().toString();
@@ -530,7 +1120,12 @@ public class FormBOGCM extends AppCompatActivity {
 
         // Crie um objeto para armazenar esses dados
         Map<String, Object> dataToSave = new HashMap<>();
-        dataToSave.put("idBOGCM", idString);
+
+
+        dataToSave.put("urlFoto1", imageUrl);
+
+
+        dataToSave.put("idBOGCM", idBOGCM);
 
         //salvar edittext
         dataToSave.put("data", dataBogcm);
@@ -585,7 +1180,7 @@ public class FormBOGCM extends AppCompatActivity {
 
         // ...
 
-        DocumentReference documentReference = db.collection("DB_BOGCM").document(idString); // .document(idString) coloca o nr da id no documento
+        DocumentReference documentReference = db.collection("DB_BOGCM").document(idBOGCM); // .document(idString) coloca o nr da id no documento
         documentReference.set(dataToSave)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -608,6 +1203,35 @@ public class FormBOGCM extends AppCompatActivity {
                     }
                 });
     }// final da funçAo salvar
+
+
+    // Exemplo de como você poderia chamar as funções
+    private void exemploChamadaFuncoes(Uri imageUri) {
+        uploadImageToStorage(imageUri, new OnSuccessListener<String>() {
+            @Override
+            public void onSuccess(String url) {
+                // A URL da imagem está disponível aqui
+                salvarDadosBOGCM();
+                limparCampos();
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -633,11 +1257,44 @@ public class FormBOGCM extends AppCompatActivity {
 
     // Função para validar os campos
     private boolean validarCampos() {
+       // String dataBogcm = eText.getText().toString();
+        //String horaInicio = editTextTime.getText().toString();
+       // String horaFinal = editTextTimehorafinal.getText().toString();
+
+        //return !dataBogcm.isEmpty() && !horaInicio.isEmpty() && !horaFinal.isEmpty();
+
         String dataBogcm = eText.getText().toString();
         String horaInicio = editTextTime.getText().toString();
         String horaFinal = editTextTimehorafinal.getText().toString();
+        String endereco = editTextEndereco.getText().toString();
+        String nomeGCMCondutorOcorrencia = editTextNomeGCMCondutorOcorrencia.getText().toString();
 
-        return !dataBogcm.isEmpty() && !horaInicio.isEmpty() && !horaFinal.isEmpty();
+
+
+
+        // Verifique se as Spinner têm seleções válidas
+        Spinner spinner = findViewById(R.id.spinnercomo);
+        String comoFoiSolicitadoSelecionado = spinner.getSelectedItem().toString();
+
+        Spinner spinnerBairro = findViewById(R.id.spinnerBairro);
+        String bairroSelecionado = spinnerBairro.getSelectedItem().toString();
+
+        Spinner spinnerGrupamento = findViewById(R.id.spinner_grupamento);
+        String grupamentoSelecionado = spinnerGrupamento.getSelectedItem().toString();
+
+
+
+
+        return !dataBogcm.isEmpty() && !horaInicio.isEmpty() && !horaFinal.isEmpty() &&
+                !endereco.isEmpty() && !nomeGCMCondutorOcorrencia.isEmpty() &&
+                !comoFoiSolicitadoSelecionado.equals("COMO FOI SOLICITADO?") &&
+                !bairroSelecionado.equals("BAIRRO?") && !grupamentoSelecionado.equals("GRUPAMENTO?");
+
+
+
+
+
+
     }
 
     // Função para sinalizar os campos obrigatórios
@@ -651,6 +1308,36 @@ public class FormBOGCM extends AppCompatActivity {
         if (editTextTimehorafinal.getText().toString().isEmpty()) {
             editTextTimehorafinal.setError("Campo obrigatório *");
         }
+        if (editTextEndereco.getText().toString().isEmpty()) {
+            editTextEndereco.setError("Campo obrigatório *");
+        }
+        if (editTextNomeGCMCondutorOcorrencia.getText().toString().isEmpty()) {
+            editTextNomeGCMCondutorOcorrencia.setError("Campo obrigatório *");
+        }
+
+        Spinner spinner = findViewById(R.id.spinnercomo);
+        if (spinner.getSelectedItemPosition() == 0) {
+            View selectedView = spinner.getSelectedView();
+            if (selectedView instanceof TextView) {
+                ((TextView) selectedView).setError("Campo obrigatório *");
+            }
+        }
+        Spinner spinnerBairro = findViewById(R.id.spinnerBairro);
+        if (spinnerBairro.getSelectedItemPosition() == 0) {
+            View selectedView = spinnerBairro.getSelectedView();
+            if (selectedView instanceof TextView) {
+                ((TextView) selectedView).setError("Campo obrigatório *");
+            }
+        }
+        Spinner spinnerGrupamento = findViewById(R.id.spinner_grupamento);
+        if (spinnerGrupamento.getSelectedItemPosition() == 0) {
+            View selectedView = spinnerGrupamento.getSelectedView();
+            if (selectedView instanceof TextView) {
+                ((TextView) selectedView).setError("Campo obrigatório *");
+            }
+        }
+
+
     }
 
     private void limparCampos() {
@@ -669,6 +1356,8 @@ public class FormBOGCM extends AppCompatActivity {
         editTextCpfq2.setText("");
         editTextTelefoneQ1.setText("");
         editTextTelefoneQ2.setText("");
+        editTextHoraChegadaOutroOrgao.setText("");
+        editTextHoraSaidaOutroOrgao.setText("");
         editTextNrRegistroOutroOrgao.setText("");
         editTextNomeGCMCondutorOcorrencia.setText("");
         editTextNomeGCMApoioOcorrencia.setText("");

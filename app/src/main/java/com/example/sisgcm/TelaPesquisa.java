@@ -11,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -27,6 +29,7 @@ public class TelaPesquisa extends AppCompatActivity {
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     FirestoreRecyclerAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,7 @@ public class TelaPesquisa extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Query query = db.collection("DB_BOGCM")
-                .orderBy("data", Query.Direction.DESCENDING) // Substitua "data" pelo nome do campo relevante
+                .orderBy("dataHoraCadastro", Query.Direction.DESCENDING) // Substitua "data" pelo nome do campo relevante
                 .limit(3);
 
         FirestoreRecyclerOptions<BoGCM> options = new FirestoreRecyclerOptions.Builder<BoGCM>()
@@ -54,6 +57,7 @@ public class TelaPesquisa extends AppCompatActivity {
             public void onBindViewHolder(ViewHolder holder, int position, BoGCM model) {
                holder.bind(model);
             }
+
 
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup group, int i) {
@@ -90,10 +94,11 @@ public class TelaPesquisa extends AppCompatActivity {
                 nomeQ2, cpfQ2, telefoneQ2, encaminhamentoOutroOrgao, horaChegadaOutroOrgao, horaSaidaOutroOrgao,
                 nrRegistroOutroOrgao, nomeGcmCondutorOcorrencia, grupamentoCondutorOcorrencia, nomeGcmApoioOcorrencia, grupamentoApoio, dataHoraCadastro, idUsuarioRegistrou;
 
-
+        ImageView imgFoto1;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
+
 
             idBOGCM = itemView.findViewById(R.id.textViewidBOGCM);
             dataBOGCM = itemView.findViewById(R.id.textViewData);
@@ -124,6 +129,9 @@ public class TelaPesquisa extends AppCompatActivity {
             grupamentoApoio = itemView.findViewById(R.id.textViewGrupamentoGcmApoio);
             dataHoraCadastro = itemView.findViewById(R.id.textViewDataHoraSalvou);
             idUsuarioRegistrou = itemView.findViewById(R.id.textViewIdUsuario);
+            imgFoto1 = itemView.findViewById(R.id.imgFoto1);
+
+
 
 
         }
@@ -158,6 +166,8 @@ public class TelaPesquisa extends AppCompatActivity {
             grupamentoApoio.setText(boGCM.getGrupamentoApoio());
             dataHoraCadastro.setText(boGCM.getDataHoraCadastro());
             idUsuarioRegistrou.setText(boGCM.getIdUsuarioRegistrou());
+            Glide.with(itemView.getContext()).load(boGCM.getUrlFoto1()).into(imgFoto1);
+
 
 
         }

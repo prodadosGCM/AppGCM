@@ -9,6 +9,92 @@ public class BoGCM {
     nrRegistroOutroOrgao, nomeGcmCondutorOcorrencia, grupamentoCondutorOcorrencia, nomeGcmApoioOcorrencia,
     grupamentoApoio, dataHoraCadastro, idUsuarioRegistrou;
 
+    private String urlFoto1;
+
+
+
+    @Override
+    public String toString() {
+        return "BoGCM{" +
+                "idBOGCM='" + idBOGCM + '\'' +
+                ", data='" + data + '\'' +
+                ", horaInicio='" + horaInicio + '\'' +
+                ", horaFinal='" + horaFinal + '\'' +
+                ", comoFoisolicitado='" + comoFoisolicitado + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", nrEndereco='" + nrEndereco + '\'' +
+                ", complementoendereco='" + complementoendereco + '\'' +
+                ", pontoReferencia='" + pontoReferencia + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", tipoOcorrencia='" + tipoOcorrencia + '\'' +
+                ", relatoObsevacao='" + relatoObsevacao + '\'' +
+                ", materialRecolhidoApreendido='" + materialRecolhidoApreendido + '\'' +
+                ", cpfQ1='" + cpfQ1 + '\'' +
+                ", nomeQ1='" + nomeQ1 + '\'' +
+                ", telefoneQ1='" + telefoneQ1 + '\'' +
+                ", cpfQ2='" + cpfQ2 + '\'' +
+                ", nomeQ2='" + nomeQ2 + '\'' +
+                ", telefoneQ2='" + telefoneQ2 + '\'' +
+                ", encaminhamentoOutroOrgao='" + encaminhamentoOutroOrgao + '\'' +
+                ", horaChegadaOutroOrgao='" + horaChegadaOutroOrgao + '\'' +
+                ", horaSaidaOutroOrgao='" + horaSaidaOutroOrgao + '\'' +
+                ", nrRegistroOutroOrgao='" + nrRegistroOutroOrgao + '\'' +
+                ", nomeGcmCondutorOcorrencia='" + nomeGcmCondutorOcorrencia + '\'' +
+                ", grupamentoCondutorOcorrencia='" + grupamentoCondutorOcorrencia + '\'' +
+                ", nomeGcmApoioOcorrencia='" + nomeGcmApoioOcorrencia + '\'' +
+                ", grupamentoApoio='" + grupamentoApoio + '\'' +
+                ", dataHoraCadastro='" + dataHoraCadastro + '\'' +
+                ", idUsuarioRegistrou='" + idUsuarioRegistrou + '\'' +
+                ", urlFoto1='" + urlFoto1 + '\'' +
+                '}';
+    }
+
+
+
+    public String getUrlFoto1() {
+        return urlFoto1;
+    }
+
+    public void setUrlFoto1(String urlFoto1) {
+        this.urlFoto1 = urlFoto1;
+    }
+
+
+
+    public BoGCM(String idBOGCM, String data, String horaInicio, String horaFinal, String comoFoisolicitado, String endereco, String nrEndereco, String complementoendereco, String pontoReferencia, String bairro, String tipoOcorrencia, String relatoObsevacao, String materialRecolhidoApreendido, String cpfQ1, String nomeQ1, String telefoneQ1, String cpfQ2, String nomeQ2, String telefoneQ2, String encaminhamentoOutroOrgao, String horaChegadaOutroOrgao, String horaSaidaOutroOrgao, String nrRegistroOutroOrgao, String nomeGcmCondutorOcorrencia, String grupamentoCondutorOcorrencia, String nomeGcmApoioOcorrencia, String grupamentoApoio, String dataHoraCadastro, String idUsuarioRegistrou, String urlFoto1) {
+        this.idBOGCM = idBOGCM;
+        this.data = data;
+        this.horaInicio = horaInicio;
+        this.horaFinal = horaFinal;
+        this.comoFoisolicitado = comoFoisolicitado;
+        this.endereco = endereco;
+        this.nrEndereco = nrEndereco;
+        this.complementoendereco = complementoendereco;
+        this.pontoReferencia = pontoReferencia;
+        this.bairro = bairro;
+        this.tipoOcorrencia = tipoOcorrencia;
+        this.relatoObsevacao = relatoObsevacao;
+        this.materialRecolhidoApreendido = materialRecolhidoApreendido;
+        this.cpfQ1 = cpfQ1;
+        this.nomeQ1 = nomeQ1;
+        this.telefoneQ1 = telefoneQ1;
+        this.cpfQ2 = cpfQ2;
+        this.nomeQ2 = nomeQ2;
+        this.telefoneQ2 = telefoneQ2;
+        this.encaminhamentoOutroOrgao = encaminhamentoOutroOrgao;
+        this.horaChegadaOutroOrgao = horaChegadaOutroOrgao;
+        this.horaSaidaOutroOrgao = horaSaidaOutroOrgao;
+        this.nrRegistroOutroOrgao = nrRegistroOutroOrgao;
+        this.nomeGcmCondutorOcorrencia = nomeGcmCondutorOcorrencia;
+        this.grupamentoCondutorOcorrencia = grupamentoCondutorOcorrencia;
+        this.nomeGcmApoioOcorrencia = nomeGcmApoioOcorrencia;
+        this.grupamentoApoio = grupamentoApoio;
+        this.dataHoraCadastro = dataHoraCadastro;
+        this.idUsuarioRegistrou = idUsuarioRegistrou;
+        this.urlFoto1 = urlFoto1;
+    }
+
+
     public BoGCM(){
         super();
     }
@@ -277,38 +363,4 @@ public class BoGCM {
         this.idUsuarioRegistrou = idUsuarioRegistrou;
     }
 
-    @Override
-    public String toString() {
-        return "BoGCM{" +
-                "idBOGCM='" + idBOGCM + '\'' +
-                ", data='" + data + '\'' +
-                ", horaInicio='" + horaInicio + '\'' +
-                ", horaFinal='" + horaFinal + '\'' +
-                ", comoFoisolicitado='" + comoFoisolicitado + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", nrEndereco='" + nrEndereco + '\'' +
-                ", complementoendereco='" + complementoendereco + '\'' +
-                ", pontoReferencia='" + pontoReferencia + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", tipoOcorrencia='" + tipoOcorrencia + '\'' +
-                ", relatoObsevacao='" + relatoObsevacao + '\'' +
-                ", materialRecolhidoApreendido='" + materialRecolhidoApreendido + '\'' +
-                ", cpfQ1='" + cpfQ1 + '\'' +
-                ", nomeQ1='" + nomeQ1 + '\'' +
-                ", telefoneQ1='" + telefoneQ1 + '\'' +
-                ", cpfQ2='" + cpfQ2 + '\'' +
-                ", nomeQ2='" + nomeQ2 + '\'' +
-                ", telefoneQ2='" + telefoneQ2 + '\'' +
-                ", encaminhamentoOutroOrgao='" + encaminhamentoOutroOrgao + '\'' +
-                ", horaChegadaOutroOrgao='" + horaChegadaOutroOrgao + '\'' +
-                ", horaSaidaOutroOrgao='" + horaSaidaOutroOrgao + '\'' +
-                ", nrRegistroOutroOrgao='" + nrRegistroOutroOrgao + '\'' +
-                ", nomeGcmCondutorOcorrencia='" + nomeGcmCondutorOcorrencia + '\'' +
-                ", grupamentoCondutorOcorrencia='" + grupamentoCondutorOcorrencia + '\'' +
-                ", nomeGcmApoioOcorrencia='" + nomeGcmApoioOcorrencia + '\'' +
-                ", grupamentoApoio='" + grupamentoApoio + '\'' +
-                ", dataHoraCadastro='" + dataHoraCadastro + '\'' +
-                ", idUsuarioRegistrou='" + idUsuarioRegistrou + '\'' +
-                '}';
-    }
 }

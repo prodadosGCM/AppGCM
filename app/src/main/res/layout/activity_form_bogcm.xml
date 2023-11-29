@@ -19,10 +19,12 @@
         android:background="@drawable/background"
         tools:context=".FormBOGCM">
 
-        <EditText
+
+    <EditText
             android:id="@+id/edit_data"
             style="@style/Edit_Text"
             android:layout_marginTop="36dp"
+            android:drawableRight="@drawable/icon_obrigatorio"
             android:hint="DATA"
             android:inputType="date"
             android:maxLength="10"
@@ -35,6 +37,7 @@
             android:id="@+id/edit_hora_inicio"
             style="@style/Edit_Text"
             android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/icon_obrigatorio"
             android:hint="HORA INICIO OCORRÊNCIA"
             android:inputType="time"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +50,7 @@
             android:id="@+id/spinnercomo"
             style="@style/Edit_Text"
             android:layout_centerHorizontal="true"
+            android:drawableRight="@drawable/icon_obrigatorio"
             android:entries="@array/itens_spinner"
             android:layout="@layout/textview_spinner"
             android:spinnerMode="dropdown"
@@ -72,6 +76,7 @@
             android:id="@+id/edit_endereco"
             style="@style/Edit_Text"
             android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/icon_obrigatorio"
             android:hint="ENDEREÇO OCORRÊNCIA"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,10 +118,27 @@
             app:layout_constraintTop_toBottomOf="@id/edit_complemento" />
 
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botao_flutuante_add_foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/azul_marinho"
+
+            android:clickable="true"
+            app:backgroundTint="@color/azul_marinho"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/add_foto" />
+
+
+
         <Spinner
             android:id="@+id/spinnerBairro"
             style="@style/Edit_Text"
             android:layout_centerHorizontal="true"
+            android:drawableRight="@drawable/icon_obrigatorio"
             android:entries="@array/itens_spinnerBairro"
             android:layout="@layout/textview_spinner"
             android:spinnerMode="dropdown"
@@ -214,8 +236,6 @@
             app:mask="(##)#####-####" />
 
 
-
-
         <TextView
             android:id="@+id/text_telaBOGCMQualificacaoQ2"
             android:layout_width="wrap_content"
@@ -266,7 +286,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_nome_Q2"
             app:mask="(##)#####-####" />
-
 
 
         <TextView
@@ -348,6 +367,7 @@
             android:id="@+id/edit_nomeGCM"
             style="@style/Edit_Text"
             android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/icon_obrigatorio"
             android:hint="NOME GCM's(CONDUTORES DA OCORRÊNCIA)"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
@@ -359,6 +379,7 @@
             android:id="@+id/spinner_grupamento"
             style="@style/Edit_Text"
             android:layout_centerHorizontal="true"
+            android:drawableRight="@drawable/icon_obrigatorio"
             android:entries="@array/itens_spinner_grupamento"
             android:layout="@layout/textview_spinner"
             android:spinnerMode="dropdown"
@@ -408,17 +429,17 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="20dp"
             android:text="@string/btn_avancaComOcorrencia"
-            app:layout_constraintEnd_toEndOf="@id/edit_hora_final"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/btn_add_foto_1"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_hora_final"
-             />
+            app:layout_constraintTop_toBottomOf="@id/btn_add_foto_1" />
 
         <EditText
             android:id="@+id/edit_hora_final"
             style="@style/Edit_Text"
             android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/icon_obrigatorio"
             android:hint="HORA FINAL OCORRÊNCIA"
             android:inputType="time"
             app:layout_constraintEnd_toEndOf="parent"
@@ -435,6 +456,7 @@
             android:layout_marginTop="16dp"
             android:hint="TIPO DE OCORRÊNCIA?"
             android:inputType="textMultiLine"
+            android:completionThreshold="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -478,7 +500,36 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+             />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_foto_1"
+            style="@style/Button"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/btn_add_foto1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/edit_hora_final"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_hora_final" />
+
+        <ImageView
+            android:id="@+id/imagem_foto_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/add_foto"
+            app:layout_constraintBottom_toBottomOf="@id/progressbarBOGCM"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressbarBOGCM"
+
+            app:layout_constraintVertical_bias="0.0" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

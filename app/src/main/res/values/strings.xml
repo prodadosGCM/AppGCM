@@ -4,9 +4,9 @@
     <string name="entrar">ENTRAR</string>
     <string name="text_TelaLogin">© 2023</string>
     <string name="btn_principal">BOGCM</string>
-    <string name="btn_principalPesquisa">PESQUISAR</string>
+    <string name="btn_principalPesquisa">CONSULTA</string>
     <string name="btn_PrincipalDinamica">DINÂMICA</string>
-    <string name="btn_PrincipalExtra">EXTRA</string>
+    <string name="btn_PrincipalExtra">RAS/EXTRA</string>
     <string name="btn_PrincipalID_Funcional">FUNCIONAL\nDIGITAL</string>
     <string name="btn_PrincipalDeslogar">SAIR</string>
 
@@ -29,9 +29,7 @@
     <string name="btn_avancaComOcorrencia">ENVIAR</string>
     <string name="btn_enviar_dinamica">ENVIAR</string>
     <string name="btn_limpar_assinatura">LIMPAR</string>
-    <string name="btn_salvar_assinatura">SALVAR</string>
-    <string name="btn_recolherAssinatturaQ1">ASSINATURA Q1</string>
-    <string name="btn_recolherAssinatturaQ2">ASSINATURA Q2</string>
+    <string name="btn_add_foto1">Foto 1</string>
 
 
     <string-array name="itens_spinner">
@@ -42,73 +40,12 @@
         <item>SUPERVISÃO</item>
     </string-array>
 
-    <string-array name="itens_spinner_tipo_ocorrencia">
-        <item>TIPO OCORRENCIA?</item>
-        <item>T-ACIDENTE DE TRÂNSITO (COM VÍTIMA)</item>
-        <item>T-ACIDENTE DE TRÂNSITO (SEM VÍTIMA)</item>
-        <item>T-ANIMAL SOLTO NA PISTA</item>
-        <item>T-DESVIO DE TRÂNSITO (APOIO A ENEL)</item>
-        <item>T-DESVIO DE TRÂNSITO (APOIO A PROLAGOS)</item>
-        <item>T-DESVIO DE TRÂNSITO (EVENTO)</item>
-        <item>T-DESVIO DE TRÂNSITO (VEÍCULO QUEBRADO NA VIA)</item>
-        <item>T-PRESERVAÇÃO DE VAGA DE VEÍCULOS</item>
-        <item>T-QUEDA (ÁRVORE NA VIA)</item>
-        <item>T-QUEDA (FIO DE ALTA TENSÃO NA VIA)</item>
-        <item>T-VEÍCULO ABANDONADO NA VIA</item>
-        <item>T-VEÍCULO ESTACIONADO IRREGULARMENTE(ESPECIFICAR NA OBSERVAÇÃO)</item>
-        <item>R-COBRANÇA IRREGULAR DE ESTACIONAMENTO (FLANELAGEM)</item>
-        <item>R-DESACATO AO SERVIDOR PÚBLICO</item>
-        <item>R-FURTO</item>
-        <item>R-IMPORTUNAÇÃO</item>
-        <item>R-MEDIAÇÃO DE CONFLITO</item>
-        <item>R-RECUPERAÇÃO DE VEÍCULO ROUBADO</item>
-        <item>R-RELACIONADO À POPULAÇÃO DE RUA(ESPECIFICAR NA OBSERVAÇÃO)</item>
-        <item>R-SOM ALTO (ESPECIFICAR NA OBSERVAÇÃO)</item>
-        <item>M-CONSTRUÇÃO EM ÁREA DE PRESERVAÇÃO</item>
-        <item>M-CORTE ILEGAL DE ÁRVORE</item>
-        <item>M-CRIME AMBIENTAL (ESPECIFICAR NA OSERVAÇÃO)</item>
-        <item>M-MAUS TRATOS A ANIMAIS</item>
-        <item>M-RESGATE DE ANIMAIS</item>
-        <item>P-ALTINHA</item>
-        <item>P-FRESCOBOL</item>
-        <item>P-FUTEBOL</item>
-        <item>D-AUXILIO AO CIDADÃO (ESPECIFICAR NA OBSERVAÇÃO)</item>
-        <item>D-AUXÍLIO NA LOCALIZAÇÃO DE FAMILIAR</item>
-        <item>D-CRIANÇA PERDIDA</item>
-        <item>D-OPERAÇÃO EM CONJUNTO COM A PMERJ</item>
-        <item>D-OPERAÇÃO EM CONJUNTO COM O DETRAN</item>
-        <item>D-OPERAÇÃO EM CONJUNTO COM OUTRA SECRETARIA(ESPEC. OBSERVAÇÃO)</item>
-        <item>D-SUPORTE AO CIDADÃO EM SURTO</item>
-        <item>V-VIOLÊNCIA DOMÉSTICA (LEI MARIA DA PENHA)</item>
-        <item>OUTROS (ESPECIFICAR NA OBSERVAÇÃO)</item>
-
-    </string-array>
-
 
     <string-array name="itens_spinnerBairro">
         <item>BAIRRO?</item>
         <item>BRAGA</item>
         <item>CENTRO</item>
         <item>SÃO CRISTÓVÃO</item>
-        <item>OUTRO (DESCREVER NA OBSERVAÇÃO)</item>
-    </string-array>
-
-
-    <string-array name="itens_spinner_qualificacao_q1">
-        <item>SELECIONE UMA DAS OPÇÕES?</item>
-        <item>SOLICITANTE</item>
-        <item>SUSPEITO</item>
-        <item>AUTOR</item>
-        <item>TESTEMUNHA</item>
-        <item>OUTRO (DESCREVER NA OBSERVAÇÃO)</item>
-    </string-array>
-
-    <string-array name="itens_spinner_qualificacao_q2">
-        <item>SELECIONE UMA DAS OPÇÕES?</item>
-        <item>SOLICITANTE</item>
-        <item>SUSPEITO</item>
-        <item>AUTOR</item>
-        <item>TESTEMUNHA</item>
         <item>OUTRO (DESCREVER NA OBSERVAÇÃO)</item>
     </string-array>
 

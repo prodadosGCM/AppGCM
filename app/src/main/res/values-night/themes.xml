@@ -15,8 +15,4 @@
     </style>
 
 
-    <style name="TEXTCOLOR">
-        <item name="android:textColor">@color/black</item>
-    </style>
-
 </resources>

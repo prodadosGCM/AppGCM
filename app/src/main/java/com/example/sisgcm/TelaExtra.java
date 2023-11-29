@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,19 +24,21 @@ import java.util.Map;
 
 public class TelaExtra extends AppCompatActivity {
 
+
     private SignaturePad signaturePad;
     private Button btn_limpar, btn_salvar; //botão salvar
-    private FirebaseFirestore db;
+
+    private String edit_CPF_Q1;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_extra);
+
         getSupportActionBar().hide(); //esconder a barra da tela com o nome do programa
 
-
-        FirebaseStorage storage = FirebaseStorage.getInstance();
 
 
         btn_limpar=findViewById(R.id.btn_limpar);
@@ -78,31 +81,30 @@ public class TelaExtra extends AppCompatActivity {
     }
 
     // Método para salvar a assinatura
+
     public void saveSignature(View view) {
+        // Obtenha o CPF digitado pelo usuário
+        EditText edit_CPF_Q1 = findViewById(R.id.edit_CPF_ExtraQ1);
+        String cpf = edit_CPF_Q1.getText().toString();
+
         Bitmap signatureBitmap = signaturePad.getSignatureBitmap();
-        // Crie uma referência para o Firebase Storage
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        // Crie uma referência para o local onde deseja armazenar a imagem
-        StorageReference signatureRef = storageRef.child("assinatura_Q1/assinatura.png");
 
-        // Converte o bitmap em um array de bytes
+        // Crie uma referência para o local onde deseja armazenar a imagem, usando o CPF como parte do nome do arquivo
+        StorageReference signatureRef = storageRef.child("assinaturas/" + cpf + "_assinatura.png");
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         signatureBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        // Faz o upload da imagem para o Firebase Storage
         UploadTask uploadTask = signatureRef.putBytes(data);
 
         uploadTask.addOnSuccessListener(taskSnapshot -> {
                     // Imagem enviada com sucesso
-                    // Agora você pode obter o URL da imagem
-                    storageRef.child("assinatura_Q1/assinatura.png").getDownloadUrl()
+                    storageRef.child("assinaturas/" + cpf + "_assinatura.png").getDownloadUrl()
                             .addOnSuccessListener(uri -> {
-                                // URL da imagem
                                 String imageUrl = uri.toString();
-
-                                // Agora você pode salvar o URL no Firestore
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 Map<String, Object> signatureData = new HashMap<>();
                                 signatureData.put("assinaturaUrl", imageUrl);
@@ -129,8 +131,9 @@ public class TelaExtra extends AppCompatActivity {
                     // Falha ao fazer upload da imagem
                     Toast.makeText(this, "Erro ao fazer upload da imagem: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
-        // Agora você pode salvar ou fazer o que quiser com a assinatura
     }
+
+
 
     @Override
     public void onBackPressed() {
