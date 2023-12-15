@@ -93,10 +93,12 @@ public class FormBOGCM extends AppCompatActivity {
 
 
     private SharedPreferences sharedPreferences;
-    private Uri mSelectedUri;
-    private ImageView mImgPhoto;
+    private Uri mSelectedUri, mSelectedUri2;
+    private ImageView mImgPhoto, mImgPhoto2;
 
     private String urlImagem;
+
+    private ImageButton mBtnSelectdPhoto;
 
 
     @Override
@@ -105,7 +107,52 @@ public class FormBOGCM extends AppCompatActivity {
         setContentView(R.layout.activity_form_bogcm);
         getSupportActionBar().hide(); //esconder a barra da tela com o nome do programa
 
+
+        //botão foto 1
+        mBtnSelectdPhoto=findViewById(R.id.btn_imagem_foto_1);
+
+        mBtnSelectdPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Cria um objeto PopupMenu, passando o contexto e a view ancorada
+                PopupMenu popupMenu = new PopupMenu(FormBOGCM.this, view);
+
+                // Infla o menu a partir do arquivo XML
+                popupMenu.getMenuInflater().inflate(R.menu.add_foto, popupMenu.getMenu());
+
+                // Define um ouvinte de clique para lidar com eventos de item de menu
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        // Lidar com o clique do item de menu aqui
+                        switch (menuItem.getItemId()) {
+                            case R.id.obter_foto_dispositivo:
+                                selectPhoto();
+
+                                return true;
+                            case R.id.tirar_foto:
+                                // Código para a Opção 2
+                                Toast.makeText(getApplicationContext(), "tirar fotos", Toast.LENGTH_SHORT).show();
+
+                                return true;
+                            // Adicione mais casos conforme necessário
+                            default:
+                                return false;
+                        }
+                    }
+                });
+
+                // Exibe o menu popup
+                popupMenu.show();
+
+
+            }
+        });
+
+
+
         mImgPhoto=findViewById(R.id.imagem_foto_1);
+        mImgPhoto2=findViewById(R.id.imagem_foto_2);
 
 
 
@@ -1001,6 +1048,16 @@ public class FormBOGCM extends AppCompatActivity {
 
     }//FINAL ON CREATE
 
+    private void selectPhoto() {
+        Intent intent = new Intent (Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivity(intent);
+        startActivityForResult(Intent.createChooser(intent, "Escolha uma imagem"), 0);
+
+
+
+    }
+
     private void obterImagemGaleria() {
         Intent intent = new Intent (Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         intent.setType("image/*");
@@ -1020,12 +1077,17 @@ public class FormBOGCM extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
                 mImgPhoto.setImageDrawable(new BitmapDrawable(bitmap));
+                mBtnSelectdPhoto.setAlpha(0);
             }catch (IOException e){
 
             }
-            }
+        }
 
     }
+
+
+
+
 
     private void uploadImageToStorage(Uri imageUri, OnSuccessListener<String> urlSuccessListener) {
         Long id;

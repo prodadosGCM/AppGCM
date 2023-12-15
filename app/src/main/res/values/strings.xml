@@ -9,7 +9,7 @@
     <string name="btn_PrincipalExtra">RAS/EXTRA</string>
     <string name="btn_PrincipalID_Funcional">FUNCIONAL\nDIGITAL</string>
     <string name="btn_PrincipalDeslogar">SAIR</string>
-
+    <string name="btn_add_foto_1">Foto 1</string>
 
     <string name="text_BOGCMComOcorrencia">Comunicado da ocorrência</string>
     <string name="text_TelaDinamica">Dinâmica</string>

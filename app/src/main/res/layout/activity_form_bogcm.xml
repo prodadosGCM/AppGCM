@@ -20,7 +20,7 @@
         tools:context=".FormBOGCM">
 
 
-    <EditText
+        <EditText
             android:id="@+id/edit_data"
             style="@style/Edit_Text"
             android:layout_marginTop="36dp"
@@ -131,7 +131,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/add_foto" />
-
 
 
         <Spinner
@@ -426,14 +425,14 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ComOcorrencia"
             style="@style/Button"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="36dp"
             android:layout_marginBottom="20dp"
+
             android:text="@string/btn_avancaComOcorrencia"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/btn_add_foto_1"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_add_foto_1" />
+            app:layout_constraintTop_toBottomOf="@id/imagem_foto_1"
+            app:layout_constraintVertical_bias="1.0" />
 
         <EditText
             android:id="@+id/edit_hora_final"
@@ -454,9 +453,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:completionThreshold="1"
             android:hint="TIPO DE OCORRÊNCIA?"
             android:inputType="textMultiLine"
-            android:completionThreshold="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -500,34 +499,63 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_add_foto_1"
-            style="@style/Button"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/btn_add_foto1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/edit_hora_final"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_hora_final" />
+
+        <LinearLayout
+            android:id="@+id/layoutFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/progressbarBOGCM"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498">
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_imagem_foto_1"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/btn_add_foto"
+            android:contentDescription="Descrição da imagem"
+            android:text="@string/btn_add_foto_1"
+            android:textColor="@android:color/black"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@id/edit_hora_final"
+            />
 
         <ImageView
             android:id="@+id/imagem_foto_1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:src="@drawable/add_foto"
-            app:layout_constraintBottom_toBottomOf="@id/progressbarBOGCM"
+            app:layout_constraintTop_toBottomOf="@id/edit_hora_final" />
+
+        <ImageButton
+            android:id="@+id/btn_imagem_foto_2"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/btn_add_foto"
+            android:contentDescription="Descrição da imagem"
+            android:text="Foto 2"
+            android:background="@android:color/transparent"
+
+            app:layout_constraintBottom_toBottomOf="@id/imagem_foto_1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.3"/>
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progressbarBOGCM"
 
-            app:layout_constraintVertical_bias="0.0" />
+        <ImageView
+            android:id="@+id/imagem_foto_2"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/add_foto"
+            app:layout_constraintBottom_toBottomOf="@id/imagem_foto_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
